@@ -66,11 +66,11 @@ export const updateInfo: UpdateField[] = [
   }
 ];
 
-const sample = {
-  title: '',
-  name: '',
-  type: '',
-  placeholder: '',
-  required: true,
-  note: ''
-};
+// const sample = {
+//   title: '',
+//   name: '',
+//   type: '',
+//   placeholder: '',
+//   required: true,
+//   note: ''
+// };
