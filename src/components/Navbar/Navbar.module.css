@@ -1,0 +1,69 @@
+.Navbar {
+    background-color: #007bc7;
+    height: 95px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.LogoContainer {
+    height: 65px;
+}
+
+.LogoContainer img {
+    object-fit: contain;
+    height: 100%;
+}
+
+.Options {
+    font-size: 14px;
+    width: 230px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Form {
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 15px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s all;
+}
+
+.Form:hover {
+    text-shadow: 0 0 1px white;
+}
+
+.Language {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    transition: 0.2s all;
+}
+
+.Language:hover,
+.Language:active {
+color: white;
+}
+
+@media (max-width: 600px) {
+    .Navbar {
+        padding: 0 10px;
+    }
+
+    .Options {
+        width: 180px;
+    }
+
+    .Form {
+        margin: 0 5px 0 0;
+    }
+
+    .LogoContainer {
+        height: 40px;
+    }
+}

@@ -1,0 +1,47 @@
+.ApplyForm {
+    width: 850px;
+    padding: 30px 50px 50px;
+    margin: 20px 0 50px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    border-radius: 3px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ApplyForm h1 {
+    text-align: center;
+    width: 95%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 20px;
+color: #3FA2F7;
+border-bottom: 1px solid #eee;
+}
+
+.ApplyForm h2 {
+    color: rgba(142, 142, 142, 1);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0 40px 20px;
+    text-align: center;
+}
+
+.Button {
+    width: 140px;
+    height: 50px;
+    margin: 15px 0 30px;
+    border-radius: 3px;
+    border: none;
+    background-color: #0095f6;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.Button:disabled {
+    background-color: #b2dffc;
+    cursor: inherit
+}

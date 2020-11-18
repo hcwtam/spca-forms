@@ -1,0 +1,30 @@
+.Apply {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Banner {
+    width: 100%;
+    background-color: #ebe1c6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BannerContainer {
+    height: 190px;
+}
+
+.BannerContainer img {
+    object-fit: contain;
+    height: 100%;
+    border-radius: 3% / 20%;
+}
+
+@media (max-width: 600px) {
+    .BannerContainer {
+        height: 130px;
+    }
+}
