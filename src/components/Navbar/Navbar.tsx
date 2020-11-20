@@ -25,12 +25,12 @@ export default function Navbar({
         <img src={logo} alt="logo" />
       </div>
       <div className={styles.Options}>
-        <div className={styles.Form} onClick={() => history.push('/apply')}>
+        {/* <div className={styles.Form} onClick={() => history.push('/apply')}>
           Apply
         </div>
         <div className={styles.Form} onClick={() => history.push('/update')}>
           Update
-        </div>
+        </div> */}
         <div
           className={styles.Language}
           style={language === 'en' ? ACTIVE_STYLE : {}}

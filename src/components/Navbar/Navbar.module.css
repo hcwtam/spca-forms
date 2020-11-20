@@ -18,7 +18,8 @@
 
 .Options {
     font-size: 14px;
-    width: 230px;
+    width: 70px;
+    margin-right: 20px;;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -53,10 +54,6 @@ color: white;
 @media (max-width: 600px) {
     .Navbar {
         padding: 0 10px;
-    }
-
-    .Options {
-        width: 180px;
     }
 
     .Form {
