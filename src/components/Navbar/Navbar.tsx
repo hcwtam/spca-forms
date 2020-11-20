@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import styles from './Navbar.module.css';
 import logo from '../../assets/logo.png';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { ContextProps, languageOptions } from '../../store/LanguageProvider';
 
 const ACTIVE_STYLE = {
@@ -13,7 +13,7 @@ export default function Navbar({
   language,
   setLanguage
 }: ContextProps): ReactElement {
-  const history = useHistory();
+  // const history = useHistory();
 
   const changeLanguage = (lang: languageOptions) => {
     if (lang !== language) setLanguage(lang);
