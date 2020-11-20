@@ -61,3 +61,14 @@
     background-color: #b2dffc;
     cursor: inherit
 }
+
+@media (max-width: 850px) {
+    .UpdateForm {
+        width: 100%;
+        padding: 30px 8% 50px;
+    }
+
+    .UpdateForm h2 {
+        font-size: 0.9rem;
+    }
+}

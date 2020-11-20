@@ -146,3 +146,24 @@ input::placeholder {
 .address .form-row {
   margin: 5px 0;
 }
+
+@media (max-width: 850px) {
+  .form-row {
+    display: block;
+  }
+
+  .form-field, .form-field3 {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .radio, .checkbox {
+    flex-flow: column;
+  }
+
+  .radio label{
+    width: 25%;
+    margin: 10px 0;
+    font-weight: normal;
+  }
+}
