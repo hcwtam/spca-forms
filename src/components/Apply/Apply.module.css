@@ -15,12 +15,14 @@
 
 .BannerContainer {
     height: 190px;
+    background-color: #ebe1c6;
 }
 
 .BannerContainer img {
     object-fit: contain;
     height: 100%;
     border-radius: 3% / 20%;
+    background-color: #ebe1c6;
 }
 
 @media (max-width: 600px) {

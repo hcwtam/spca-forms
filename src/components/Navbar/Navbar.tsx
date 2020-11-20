@@ -1,18 +1,19 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 
 import styles from './Navbar.module.css';
 import logo from '../../assets/logo.png';
 import { useHistory } from 'react-router-dom';
-
-type languageOptions = 'en' | 'hk';
+import { ContextProps, languageOptions } from '../../store/LanguageProvider';
 
 const ACTIVE_STYLE = {
   color: 'white'
 };
 
-export default function Navbar(): ReactElement {
+export default function Navbar({
+  language,
+  setLanguage
+}: ContextProps): ReactElement {
   const history = useHistory();
-  const [language, setLanguage] = useState<languageOptions>('en');
 
   const changeLanguage = (lang: languageOptions) => {
     if (lang !== language) setLanguage(lang);

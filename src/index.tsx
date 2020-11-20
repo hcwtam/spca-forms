@@ -5,12 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { LanguageProvider } from './store/LanguageProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </LanguageProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,10 +1,14 @@
 import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
+import { languageOptions } from '../../store/LanguageProvider';
 import { UpdateFormData } from '../Update/UpdateForm/UpdateForm';
 
 import { UpdateField } from './updateFields';
 
-export const chooseFormTypes = (field: UpdateField) => {
+export const chooseFormTypes = (
+  field: UpdateField,
+  language: languageOptions
+) => {
   switch (field.type) {
     case 'radio':
       return (
@@ -27,14 +31,14 @@ export const chooseFormTypes = (field: UpdateField) => {
                   className="checkbox-button"
                   onClick={() => form.setFieldValue(field.name, field.options)}
                 >
-                  All
+                  {language === 'en' ? 'All' : '全選'}
                 </div>
                 <div>{' | '}</div>
                 <div
                   className="checkbox-button"
                   onClick={() => form.setFieldValue(field.name, [])}
                 >
-                  Clear
+                  {language === 'en' ? 'Clear' : '清除'}
                 </div>
               </div>
               <div className={field.type}>
@@ -82,7 +86,8 @@ export const chooseFormTypes = (field: UpdateField) => {
 
 export const generateField = (
   { errors, touched }: FormikProps<UpdateFormData>,
-  field: UpdateField
+  field: UpdateField,
+  language: languageOptions = 'en'
 ) => (
   <div className="form-row" key={field.name}>
     {field.title ? (
@@ -101,7 +106,7 @@ export const generateField = (
       <div> </div>
     )}
     <div className="form-field">
-      {chooseFormTypes(field)}
+      {chooseFormTypes(field, language)}
       {field.note ? <div className="form-note">{field.note}</div> : null}
       {errors[field.name as keyof UpdateFormData] &&
       touched[field.name as keyof UpdateFormData] ? (
@@ -113,8 +118,11 @@ export const generateField = (
   </div>
 );
 
-export const generateAddressField = (formik: FormikProps<UpdateFormData>) => {
-  const addressFields = [
+export const generateAddressField = (
+  formik: FormikProps<UpdateFormData>,
+  language: languageOptions
+) => {
+  const addressFieldsEN = [
     {
       name: 'address1',
       type: 'text',
@@ -140,14 +148,54 @@ export const generateAddressField = (formik: FormikProps<UpdateFormData>) => {
       required: false
     }
   ];
+  const addressFieldsHK = [
+    {
+      name: 'address1',
+      type: 'text',
+      placeholder: '大廈名稱 / 地段號數',
+      required: false
+    },
+    {
+      name: 'address2',
+      type: 'text',
+      placeholder: '街道及門牌號碼  / 屋邨名稱 / 鄉村名稱',
+      required: false
+    },
+    {
+      name: 'district',
+      type: 'text',
+      placeholder: '地區',
+      required: false
+    },
+    {
+      name: 'region',
+      type: 'text',
+      placeholder: '地域',
+      required: false
+    }
+  ];
+  let addressFields = addressFieldsEN;
+  if (language === 'hk') addressFields = addressFieldsHK;
   return (
     <div className="address">
       <div className="form-row">
-        <label>Address</label>
+        <label>{language === 'en' ? 'Address' : '地址'}</label>
         <div className="form-field3">
-          <Field type="text" name="flat" placeholder="Flat" />
-          <Field type="text" name="floor" placeholder="Floor" />
-          <Field type="text" name="block" placeholder="Block" />
+          <Field
+            type="text"
+            name="flat"
+            placeholder={language === 'en' ? 'Flat' : '室'}
+          />
+          <Field
+            type="text"
+            name="floor"
+            placeholder={language === 'en' ? 'Floor' : '樓層'}
+          />
+          <Field
+            type="text"
+            name="block"
+            placeholder={language === 'en' ? 'Block' : '座號'}
+          />
         </div>
       </div>
       {addressFields.map((field) => generateField(formik, field))}
