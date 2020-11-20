@@ -1,4 +1,4 @@
-import { Field, FormikProps } from 'formik';
+import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
 import { UpdateFormData } from '../Update/UpdateForm/UpdateForm';
 
@@ -8,14 +8,62 @@ export const chooseFormTypes = (field: UpdateField) => {
   switch (field.type) {
     case 'radio':
       return (
-        <div className="radios">
+        <div className={field.type} key={field.name}>
           {field.options?.map((option) => (
-            <label>
-              <Field type="radio" name="picked" value={option} />
+            <label key={option}>
+              <Field type={field.type} name={field.name} value={option} />
               {option}
             </label>
           ))}
         </div>
+      );
+    case 'checkbox':
+      return (
+        <Field name={field.name} key={field.name}>
+          {({ field: fieldProps, form }: FieldProps<any>) => (
+            <>
+              <div className="checkbox-buttons">
+                <div
+                  className="checkbox-button"
+                  onClick={() => form.setFieldValue(field.name, field.options)}
+                >
+                  All
+                </div>
+                <div>{' | '}</div>
+                <div
+                  className="checkbox-button"
+                  onClick={() => form.setFieldValue(field.name, [])}
+                >
+                  Clear
+                </div>
+              </div>
+              <div className={field.type}>
+                {field.options?.map((option) => (
+                  <label key={option}>
+                    <Field
+                      type={field.type}
+                      name={field.name}
+                      value={option}
+                      checked={fieldProps.value.includes(option)}
+                      onChange={() => {
+                        if (fieldProps.value.includes(option)) {
+                          const nextValue = fieldProps.value.filter(
+                            (value: string): boolean => value !== option
+                          );
+                          form.setFieldValue(field.name, nextValue);
+                        } else {
+                          const nextValue = fieldProps.value.concat(option);
+                          form.setFieldValue(field.name, nextValue);
+                        }
+                      }}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            </>
+          )}
+        </Field>
       );
     case 'text':
       return (
@@ -23,6 +71,7 @@ export const chooseFormTypes = (field: UpdateField) => {
           type={field.type}
           name={field.name}
           placeholder={field.placeholder}
+          key={field.name}
         />
       );
 
@@ -35,9 +84,16 @@ export const generateField = (
   { errors, touched }: FormikProps<UpdateFormData>,
   field: UpdateField
 ) => (
-  <div className="form-row">
+  <div className="form-row" key={field.name}>
     {field.title ? (
-      <label htmlFor={field.name}>
+      <label
+        htmlFor={field.name}
+        style={
+          field.type === 'checkbox'
+            ? { alignSelf: 'flex-start', marginTop: 10 }
+            : {}
+        }
+      >
         {field.title}
         {field.required ? <span> *</span> : null}
       </label>
@@ -85,7 +141,7 @@ export const generateAddressField = (formik: FormikProps<UpdateFormData>) => {
     }
   ];
   return (
-    <>
+    <div className="address">
       <div className="form-row">
         <label>Address</label>
         <div className="form-field3">
@@ -95,6 +151,6 @@ export const generateAddressField = (formik: FormikProps<UpdateFormData>) => {
         </div>
       </div>
       {addressFields.map((field) => generateField(formik, field))}
-    </>
+    </div>
   );
 };

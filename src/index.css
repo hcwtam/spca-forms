@@ -22,6 +22,11 @@ form {
   color: none;
 }
 
+label {
+  font-weight: 600;
+  color: #555;
+}
+
 input[type='text'] {
   margin: 3px 0;
   outline: 0;
@@ -48,7 +53,7 @@ input[type='text'] {
 }
 
 input:focus {
-  border: 1px solid rgb(173, 173, 173);
+  border: 1px solid rgb(141, 190, 255);
 }
 
 input::placeholder {
@@ -65,12 +70,46 @@ input::placeholder {
   align-items: center;
 }
 
-.radios {
+.radio, .checkbox {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.radios label {
-  margin-right: 20%;
+.radio label{
+  width: 25%;
+  margin: 20px 5% 20px 0;
+  font-weight: normal;
+}
+
+.radio label:last-child {
+  margin-right: 0;
+}
+
+.checkbox-buttons {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.checkbox-button {
+  color: rgba(66,153,225,1) !important;
+  cursor: pointer;
+  
+}
+
+.checkbox-button:hover {
+  color: rgba(66,153,225,0.8)!important;
+}
+
+.checkbox label {
+  width: 100%;
+  margin: 5px 0;
+  font-weight: normal;
 }
 
 .form-field {
@@ -95,6 +134,15 @@ input::placeholder {
   color: #999;
 }
 .form-error {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgb(219, 36, 36);
+}
+
+.address {
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.address .form-row {
+  margin: 5px 0;
 }

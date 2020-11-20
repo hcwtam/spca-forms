@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
 import styles from './UpdateForm.module.css';
 import {
   UpdateField,
-  particulars,
-  updateInfo
+  PARTICULARS,
+  UPDATE_INFO
 } from '../../formFields/updateFields';
 import {
   generateAddressField,
@@ -20,15 +20,17 @@ export type UpdateFormData = {
   title: string;
   hkidNumber: string;
   contactNumber: string;
-  flat: string;
-  floor: string;
-  block: string;
-  address1: string;
-  address2: string;
-  district: string;
-  region: string;
-  email: string;
-  language: string;
+  flat?: string;
+  floor?: string;
+  block?: string;
+  address1?: string;
+  address2?: string;
+  district?: string;
+  region?: string;
+  email?: string;
+  language?: string;
+  days?: string[];
+  serviceTypes?: string[];
 };
 
 export default function UpdateForm(): ReactElement {
@@ -48,7 +50,9 @@ export default function UpdateForm(): ReactElement {
     district: '',
     region: '',
     email: '',
-    language: ''
+    language: '',
+    days: [],
+    serviceTypes: []
   };
 
   const validationSchema = Yup.object({
@@ -78,7 +82,9 @@ export default function UpdateForm(): ReactElement {
     district: Yup.string(),
     region: Yup.string(),
     email: Yup.string().email(),
-    language: Yup.string()
+    language: Yup.string(),
+    days: Yup.array(),
+    serviceTypes: Yup.array()
   });
 
   const onSubmit = async (values: UpdateFormData) => {
@@ -98,15 +104,19 @@ export default function UpdateForm(): ReactElement {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {(formik) => {
+          {(formik: FormikProps<UpdateFormData>) => {
+            console.log(formik);
+
             return (
               <Form>
-                {particulars.map((field: UpdateField) =>
+                {PARTICULARS.map((field: UpdateField) =>
                   generateField(formik, field)
                 )}
+                <div className={styles.Box} />
                 <h1>Information to be updated</h1>
+                <h2>Please fill in the fields you wish to update</h2>
                 {generateAddressField(formik)}
-                {updateInfo.map((field: UpdateField) =>
+                {UPDATE_INFO.map((field: UpdateField) =>
                   generateField(formik, field)
                 )}
                 <div className={styles.Statement}>

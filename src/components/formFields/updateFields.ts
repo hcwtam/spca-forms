@@ -9,7 +9,7 @@ export type UpdateField = {
   as?: string;
 };
 
-export const particulars: UpdateField[] = [
+export const PARTICULARS: UpdateField[] = [
   {
     title: 'First Name',
     name: 'firstName',
@@ -49,7 +49,7 @@ export const particulars: UpdateField[] = [
   }
 ];
 
-export const updateInfo: UpdateField[] = [
+export const UPDATE_INFO: UpdateField[] = [
   {
     title: 'Email',
     name: 'email',
@@ -62,6 +62,33 @@ export const updateInfo: UpdateField[] = [
     name: 'language',
     type: 'radio',
     options: ['Chinese', 'English'],
+    required: false
+  },
+  {
+    title: 'Preferred Days',
+    name: 'days',
+    type: 'checkbox',
+    options: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ],
+    required: false
+  },
+  {
+    title: 'Service Types',
+    name: 'serviceTypes',
+    type: 'checkbox',
+    options: [
+      'SPCA Events',
+      'Administrative Support',
+      'Kennel Keeper',
+      'Foster Parent'
+    ],
     required: false
   }
 ];
