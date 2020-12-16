@@ -90,7 +90,7 @@ input::placeholder {
 
 .radio label{
   width: 25%;
-  margin: 20px 5% 20px 0;
+  margin: 20px 0;
   font-weight: normal;
 }
 
@@ -164,7 +164,6 @@ input::placeholder {
 }
 
 .question {
-  padding-top: 50px;
   width: 100%;
   line-height: 1.9;
   margin: 40px 0;
@@ -178,6 +177,14 @@ input::placeholder {
   margin: 40px 0;
   color: #999;
   font-size: 0.9rem;
+}
+
+.footnote {
+  width: 100%;
+  line-height: 1.9;
+  margin: 40px 0;
+  color: #999;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 850px) {

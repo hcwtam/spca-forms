@@ -22,10 +22,7 @@ import {
   DECLARATION_EN,
   DECLARATION_HK
 } from '../../formFields/applyFields';
-import {
-  generateAddressField,
-  generateField
-} from '../../formFields/formUtils';
+import { generateField } from '../../formFields/formUtils';
 import { languageContext } from '../../../store/LanguageProvider';
 import { FieldType } from '../../formFields/Types';
 
@@ -42,12 +39,6 @@ export type ApplyFormData = {
   emergencyContact: string;
   relationship: string;
   emergencyNumber: string;
-  flat?: string;
-  floor?: string;
-  block?: string;
-  address1?: string;
-  address2?: string;
-  district?: string;
   region?: string;
   language?: string;
   experience?: number;
@@ -121,16 +112,10 @@ export default function ApplyForm(): ReactElement {
     dateOfBirth: '',
     contactNumber: '',
     email: '',
+    region: '',
     emergencyContact: '',
     relationship: '',
     emergencyNumber: '',
-    flat: '',
-    floor: '',
-    block: '',
-    address1: '',
-    address2: '',
-    district: '',
-    region: '',
     language: '',
     experience: 0,
     hasPets: '',
@@ -149,7 +134,7 @@ export default function ApplyForm(): ReactElement {
 
   const validationSchema = Yup.object({
     isMember: Yup.string().required(REQUIRED),
-    membershipNo: Yup.string().required(REQUIRED),
+    membershipNo: Yup.string(),
     firstName: Yup.string().required(REQUIRED),
     lastName: Yup.string().required(REQUIRED),
     title: Yup.string().required(REQUIRED),
@@ -161,7 +146,7 @@ export default function ApplyForm(): ReactElement {
         (val) => val?.toString().length === 4
       ),
     dateOfBirth: Yup.string().required(REQUIRED),
-    email: Yup.string().email(),
+
     contactNumber: Yup.number()
       .typeError('it must be number')
       .required(REQUIRED)
@@ -170,7 +155,9 @@ export default function ApplyForm(): ReactElement {
         'Must be exactly 8 digits',
         (val) => val?.toString().length === 8
       ),
-    emergencyContact: Yup.string().required(),
+    email: Yup.string().email().required(REQUIRED),
+    region: Yup.string().required(REQUIRED),
+    emergencyContact: Yup.string().required(REQUIRED),
     relationship: Yup.string().required(),
     emergencyNumber: Yup.number()
       .typeError('it must be number')
@@ -180,26 +167,20 @@ export default function ApplyForm(): ReactElement {
         'Must be exactly 8 digits',
         (val) => val?.toString().length === 8
       ),
-    flat: Yup.string(),
-    floor: Yup.string(),
-    block: Yup.string(),
-    address1: Yup.string(),
-    address2: Yup.string(),
-    district: Yup.string(),
-    region: Yup.string(),
-    language: Yup.string(),
-    hasPets: Yup.string(),
+
+    language: Yup.string().required(REQUIRED),
+    hasPets: Yup.string().required(REQUIRED),
     petTypes: Yup.array(),
-    days: Yup.array(),
-    serviceTypes: Yup.array(),
-    hasIllness: Yup.string(),
+    days: Yup.array().required(REQUIRED),
+    serviceTypes: Yup.array().required(REQUIRED),
+    hasIllness: Yup.string().required(REQUIRED),
     illnesses: Yup.string(),
-    infoCollect1: Yup.string(),
-    infoCollect2: Yup.string(),
-    compensation: Yup.string(),
-    tetanus: Yup.string(),
-    rabies: Yup.string(),
-    declaration: Yup.string()
+    infoCollect1: Yup.string().required(REQUIRED),
+    infoCollect2: Yup.string().required(REQUIRED),
+    compensation: Yup.string().required(REQUIRED),
+    tetanus: Yup.string().required(REQUIRED),
+    rabies: Yup.string().required(REQUIRED),
+    declaration: Yup.string().required(REQUIRED)
   });
 
   const onSubmit = async (values: ApplyFormData) => {
@@ -223,7 +204,6 @@ export default function ApplyForm(): ReactElement {
                   generateField(formik, field, language)
                 )}
                 <div className={styles.Box} />
-                {generateAddressField(formik, language)}
                 <h1>{APPLY_FORM_CONTENT.volunteerInfoTitle}</h1>
                 {APPLY_INFO.map((field: FieldType) =>
                   generateField(formik, field, language)

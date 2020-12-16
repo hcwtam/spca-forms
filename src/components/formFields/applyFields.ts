@@ -34,7 +34,7 @@ export const PARTICULARS_EN: FieldType[] = [
     title: 'Title',
     name: 'title',
     type: 'radio',
-    options: ['Mr.', 'Ms.', 'Mrs.'],
+    options: ['Mr.', 'Ms.', 'Mrs.', 'Dr.'],
     required: true
   },
   {
@@ -62,7 +62,14 @@ export const PARTICULARS_EN: FieldType[] = [
     name: 'email',
     type: 'text',
     placeholder: 'Email',
-    required: false
+    required: true
+  },
+  {
+    title: 'Region',
+    name: 'region',
+    type: 'radio',
+    options: ['HK Island', 'Kowloon', 'New Territories'],
+    required: true
   },
   {
     title: 'Emergency Contact Name',
@@ -120,7 +127,7 @@ export const PARTICULARS_HK: FieldType[] = [
     title: '稱謂',
     name: 'title',
     type: 'radio',
-    options: ['先生', '小姐', '太太'],
+    options: ['先生', '小姐', '太太', '博士'],
     required: true
   },
   {
@@ -148,7 +155,14 @@ export const PARTICULARS_HK: FieldType[] = [
     name: 'email',
     type: 'text',
     placeholder: '電郵',
-    required: false
+    required: true
+  },
+  {
+    title: '區域',
+    name: 'region',
+    type: 'radio',
+    options: ['香港島', '九龍', '新界'],
+    required: true
   },
   {
     title: '緊急聯絡人姓名',
@@ -179,7 +193,7 @@ export const APPLY_INFO_EN: FieldType[] = [
     name: 'language',
     type: 'radio',
     options: ['Chinese', 'English'],
-    required: false
+    required: true
   },
   {
     title: 'Volunteering Experience',
@@ -218,7 +232,7 @@ export const APPLY_INFO_EN: FieldType[] = [
       'Saturday',
       'Sunday'
     ],
-    required: false
+    required: true
   },
   {
     title: 'Service Types',
@@ -227,14 +241,17 @@ export const APPLY_INFO_EN: FieldType[] = [
     options: [
       'SPCA Events',
       'Administrative Support',
-      'Kennel Keeper',
-      'Foster Parent',
+      'Kennel Keeper [i]',
+      'Foster Parent [ii]',
       'Artwork Design',
       'IT Related Support',
       'Summer Internship (Jul - Aug)',
       'Through-the-year Internship'
     ],
-    required: false
+    required: true,
+    footnote1: '[i] Kennel Keeper: 9am – 12noon kennel cleaning',
+    footnote2:
+      '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
   },
   {
     question:
@@ -259,7 +276,7 @@ export const APPLY_INFO_HK: FieldType[] = [
     name: 'language',
     type: 'radio',
     options: ['中文', '英文'],
-    required: false
+    required: true
   },
   {
     title: '義工年資',
@@ -296,7 +313,7 @@ export const APPLY_INFO_HK: FieldType[] = [
       '星期六',
       '星期日'
     ],
-    required: false
+    required: true
   },
   {
     title: '服務性質',
@@ -309,10 +326,13 @@ export const APPLY_INFO_HK: FieldType[] = [
       '暫養家長',
       '繪圖設計',
       'IT技術支援',
-      '暑期實習（七月至八月）',
-      '全年實習'
+      '暑期實習（七月至八月）[i]',
+      '全年實習 [ii]'
     ],
-    required: false
+    required: true,
+    footnote1: '[i] 動物管理員 - 9am – 12noon 清潔狗房籠舍',
+    footnote2:
+      '[ii] 暫養家長 - 為動物提供一個臨時的家，寵物將會暫住於閣下的家,由數星期到數月不等'
   },
   {
     question:
@@ -339,7 +359,7 @@ export const INFO_COLLECTION_EN: FieldType[] = [
     name: 'infoCollect1',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   },
   {
     statement:
@@ -348,7 +368,7 @@ export const INFO_COLLECTION_EN: FieldType[] = [
     name: 'infoCollect2',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   }
 ];
 
@@ -360,7 +380,7 @@ export const INFO_COLLECTION_HK: FieldType[] = [
     name: 'infoCollect1',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   },
   {
     statement:
@@ -369,7 +389,7 @@ export const INFO_COLLECTION_HK: FieldType[] = [
     name: 'infoCollect2',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   }
 ];
 
@@ -387,7 +407,7 @@ export const COMPENSATION_EN: FieldType[] = [
     name: 'compensation',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   }
 ];
 
@@ -405,7 +425,7 @@ export const COMPENSATION_HK: FieldType[] = [
     name: 'compensation',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   }
 ];
 
@@ -417,7 +437,7 @@ export const TETANUS_EN: FieldType[] = [
     name: 'tetanus',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   }
 ];
 
@@ -429,7 +449,7 @@ export const TETANUS_HK: FieldType[] = [
     name: 'tetanus',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   }
 ];
 
@@ -441,7 +461,7 @@ export const RABIES_EN: FieldType[] = [
     name: 'rabies',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   }
 ];
 export const RABIES_HK: FieldType[] = [
@@ -452,7 +472,7 @@ export const RABIES_HK: FieldType[] = [
     name: 'rabies',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   }
 ];
 
@@ -464,7 +484,7 @@ export const DECLARATION_EN = [
     name: 'declaration',
     type: 'radio',
     options: ['Agree', 'Disagree'],
-    required: false
+    required: true
   }
 ];
 export const DECLARATION_HK = [
@@ -475,7 +495,7 @@ export const DECLARATION_HK = [
     name: 'declaration',
     type: 'radio',
     options: ['同意', '不同意'],
-    required: false
+    required: true
   }
 ];
 

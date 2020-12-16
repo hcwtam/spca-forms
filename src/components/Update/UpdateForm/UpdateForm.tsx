@@ -10,10 +10,7 @@ import {
   UPDATE_INFO_EN,
   UPDATE_INFO_HK
 } from '../../formFields/updateFields';
-import {
-  generateAddressField,
-  generateField
-} from '../../formFields/formUtils';
+import { generateField } from '../../formFields/formUtils';
 import { languageContext } from '../../../store/LanguageProvider';
 import { FieldType } from '../../formFields/Types';
 import { REQUIRED_EN, REQUIRED_HK } from '../../formFields/applyFields';
@@ -21,15 +18,8 @@ import { REQUIRED_EN, REQUIRED_HK } from '../../formFields/applyFields';
 export type UpdateFormData = {
   firstName: string;
   lastName: string;
-  title: string;
   hkidNumber: string;
   contactNumber: string;
-  flat?: string;
-  floor?: string;
-  block?: string;
-  address1?: string;
-  address2?: string;
-  district?: string;
   region?: string;
   email?: string;
   language?: string;
@@ -42,20 +32,6 @@ const UPDATE_FORM_CONTENT_EN = {
   required: 'Please fill in the fields for record retrieval purpose',
   updateTitle: 'Information to be updated',
   updateSubtitle: 'Please fill in the fields you wish to update',
-  statement: `Changes have been made to the Personal Data (Privacy)
-  Ordinance which relates to the use of our existing members’
-  personal data for direct marketing. This includes our
-  quarterly “Pawprint” newsmagazine as well as receiving
-  information regarding gifting, charity mail order, events, and
-  other marketing activities. SPCA hopes that you continue to
-  support our work and that we may continue to use your personal
-  data provided for these direct marketing purposes. If you
-  agree that your contact details may continue to be used as
-  before, there is no need for you to take any further action.
-  However, if you no longer wish us to use your personal data to
-  receive the SPCA newsmagazine and other information, please
-  indicate your wish by email membership@spca.org.hk or by fax
-  2511 5590.`,
   submit: 'Submit'
 };
 
@@ -64,8 +40,6 @@ const UPDATE_FORM_CONTENT_HK = {
   updateTitle: '更新資料',
   updateSubtitle: '請填寫需要更新之資料',
   required: '為方便檢索記錄，請以英文填寫以下相關欄目',
-  statement:
-    '個人資料（私隱）條例現已生效，協會將使用現有會員及捐贈者有關資料寄出季刊「足印」、慈善籌款單張、郵購服務資料及推廣活動簡章。愛護動物協會希望閣下能支持我們的工作，讓我們繼續使用有關資料作推廣之用。若你一如以往支持本會推廣活動，則無須回覆；但倘若你不欲收到協會的刊物及資訊，請電郵至membership@spca.org.hk 或傳真至2511 5590。',
   submit: '提交'
 };
 
@@ -86,15 +60,8 @@ export default function UpdateForm(): ReactElement {
   const initialValues = {
     firstName: '',
     lastName: '',
-    title: '',
     hkidNumber: '',
     contactNumber: '',
-    flat: '',
-    floor: '',
-    block: '',
-    address1: '',
-    address2: '',
-    district: '',
     region: '',
     email: '',
     language: '',
@@ -105,7 +72,6 @@ export default function UpdateForm(): ReactElement {
   const validationSchema = Yup.object({
     firstName: Yup.string().required(REQUIRED),
     lastName: Yup.string().required(REQUIRED),
-    title: Yup.string().required(REQUIRED),
     hkidNumber: Yup.string()
       .required(REQUIRED)
       .test(
@@ -115,17 +81,11 @@ export default function UpdateForm(): ReactElement {
       ),
     contactNumber: Yup.number()
       .typeError('it must be number')
-      .required(REQUIRED)
       .test(
         'len',
         'Must be exactly 8 digits',
         (val) => val?.toString().length === 8
       ),
-    flat: Yup.string(),
-    floor: Yup.string(),
-    block: Yup.string(),
-    address1: Yup.string(),
-    address2: Yup.string(),
     district: Yup.string(),
     region: Yup.string(),
     email: Yup.string().email(),
@@ -160,13 +120,9 @@ export default function UpdateForm(): ReactElement {
                 <div className={styles.Box} />
                 <h1>{UPDATE_FORM_CONTENT.updateTitle}</h1>
                 <h2>{UPDATE_FORM_CONTENT.updateSubtitle}</h2>
-                {generateAddressField(formik, language)}
                 {UPDATE_INFO.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
-                <div className={styles.Statement}>
-                  {UPDATE_FORM_CONTENT.statement}
-                </div>
                 <button
                   className={styles.Button}
                   type="submit"

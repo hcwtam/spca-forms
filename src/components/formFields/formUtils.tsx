@@ -142,6 +142,8 @@ export const generateField = (
         ) : null}
       </div>
     </div>
+    {field.footnote1 ? <div className="footnote">{field.footnote1}</div> : null}
+    {field.footnote2 ? <div className="footnote">{field.footnote2}</div> : null}
   </div>
 );
 

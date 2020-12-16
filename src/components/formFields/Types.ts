@@ -12,4 +12,6 @@ export type FieldType = {
   required: boolean;
   note?: string;
   as?: string;
+  footnote1?: string;
+  footnote2?: string;
 };

@@ -16,13 +16,6 @@ export const PARTICULARS_EN: FieldType[] = [
     required: true
   },
   {
-    title: 'Title',
-    name: 'title',
-    type: 'radio',
-    options: ['Mr.', 'Ms.', 'Mrs.'],
-    required: true
-  },
-  {
     title: 'HKID Number',
     name: 'hkidNumber',
     type: 'text',
@@ -30,13 +23,6 @@ export const PARTICULARS_EN: FieldType[] = [
     required: true,
     note:
       '(For identity verification, please fill in the first 4 characters of your HKID number, e.g. A123)'
-  },
-  {
-    title: 'Contact Number',
-    name: 'contactNumber',
-    type: 'text',
-    placeholder: 'Local 8 digits contact no.',
-    required: true
   }
 ];
 export const PARTICULARS_HK: FieldType[] = [
@@ -54,13 +40,7 @@ export const PARTICULARS_HK: FieldType[] = [
     placeholder: '名字',
     required: true
   },
-  {
-    title: '稱謂',
-    name: 'title',
-    type: 'radio',
-    options: ['先生', '小姐', '太太'],
-    required: true
-  },
+
   {
     title: '香港身份證號碼',
     name: 'hkidNumber',
@@ -68,22 +48,30 @@ export const PARTICULARS_HK: FieldType[] = [
     placeholder: '香港身份證號碼',
     required: true,
     note: '(為核實身份，請輸入香港身份證號碼頭4位字元, e.g. A123)'
-  },
-  {
-    title: '聯絡電話',
-    name: 'contactNumber',
-    type: 'text',
-    placeholder: '本地8位數字聯絡電話',
-    required: true
   }
 ];
 
 export const UPDATE_INFO_EN: FieldType[] = [
   {
+    title: 'Contact Number',
+    name: 'contactNumber',
+    type: 'text',
+    placeholder: 'Local 8 digits contact no.',
+    required: false
+  },
+
+  {
     title: 'Email',
     name: 'email',
     type: 'text',
     placeholder: 'Email',
+    required: false
+  },
+  {
+    title: 'Region',
+    name: 'region',
+    type: 'radio',
+    options: ['HK Island', 'Kowloon', 'New Territories'],
     required: false
   },
   {
@@ -115,19 +103,41 @@ export const UPDATE_INFO_EN: FieldType[] = [
     options: [
       'SPCA Events',
       'Administrative Support',
-      'Kennel Keeper',
-      'Foster Parent'
+      'Kennel Keeper [i]',
+      'Foster Parent [ii]',
+      'Artwork Design',
+      'IT Related Support',
+      'Summer Internship (Jul - Aug)',
+      'Through-the-year Internship'
     ],
-    required: false
+    required: false,
+    footnote1: '[i] Kennel Keeper: 9am – 12noon kennel cleaning',
+    footnote2:
+      '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
   }
 ];
 
 export const UPDATE_INFO_HK: FieldType[] = [
   {
+    title: '聯絡電話',
+    name: 'contactNumber',
+    type: 'text',
+    placeholder: '本地8位數字聯絡電話',
+    required: false
+  },
+
+  {
     title: '電郵',
     name: 'email',
     type: 'text',
     placeholder: '電郵',
+    required: false
+  },
+  {
+    title: '區域',
+    name: 'region',
+    type: 'radio',
+    options: ['香港島', '九龍', '新界'],
     required: false
   },
   {
@@ -156,8 +166,20 @@ export const UPDATE_INFO_HK: FieldType[] = [
     title: '服務性質',
     name: 'serviceTypes',
     type: 'checkbox',
-    options: ['大型活動', '文職工作', '動物管理員', '暫養家長'],
-    required: false
+    options: [
+      '大型活動',
+      '文職工作',
+      '動物管理員',
+      '暫養家長',
+      '繪圖設計',
+      'IT技術支援',
+      '暑期實習（七月至八月）[i]',
+      '全年實習 [ii]'
+    ],
+    required: false,
+    footnote1: '[i] 動物管理員 - 9am – 12noon 清潔狗房籠舍',
+    footnote2:
+      '[ii] 暫養家長 - 為動物提供一個臨時的家，寵物將會暫住於閣下的家,由數星期到數月不等'
   }
 ];
 
