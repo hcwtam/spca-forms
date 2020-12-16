@@ -27,7 +27,10 @@ label {
   color: #555;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='date'],
+input[type='number']
+ {
   margin: 3px 0;
   outline: 0;
   overflow: hidden;
@@ -46,10 +49,17 @@ input[type='text'] {
   -ms-flex-direction: row;
   flex-direction: row;
   font-size: 14px;
-  font-weight: 300;
   position: relative;
   width: 100%;
   height: 45px;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+
+input[type='number'] {
+  width: 100px;
 }
 
 input:focus {
@@ -64,7 +74,6 @@ input::placeholder {
 
 .form-row {
   width: 100%;
-  margin: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -130,8 +139,9 @@ input::placeholder {
 }
 
 .form-note {
-  font-size: .75rem;
+  font-size: .85rem;
   color: #999;
+  line-height: 1.8;
 }
 .form-error {
   font-size: 0.9rem;
@@ -145,6 +155,28 @@ input::placeholder {
 
 .address .form-row {
   margin: 5px 0;
+}
+
+.field {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.question {
+  padding-top: 50px;
+  width: 100%;
+  line-height: 1.9;
+  margin: 40px 0;
+  font-weight: 600;
+  color: #555;
+}
+
+.statement {
+  width: 100%;
+  line-height: 1.9;
+  margin: 40px 0;
+  color: #999;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 850px) {

@@ -1,12 +1,12 @@
 import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
 import { languageOptions } from '../../store/LanguageProvider';
+import { ApplyFormData } from '../Apply/ApplyForm/ApplyForm';
 import { UpdateFormData } from '../Update/UpdateForm/UpdateForm';
-
-import { UpdateField } from './updateFields';
+import { FieldType } from './Types';
 
 export const chooseFormTypes = (
-  field: UpdateField,
+  field: FieldType,
   language: languageOptions
 ) => {
   switch (field.type) {
@@ -78,6 +78,18 @@ export const chooseFormTypes = (
           key={field.name}
         />
       );
+    case 'number':
+      return (
+        <Field
+          type={field.type}
+          name={field.name}
+          placeholder={field.placeholder}
+          key={field.name}
+          min="0"
+        />
+      );
+    case 'date':
+      return <Field type={field.type} name={field.name} key={field.name} />;
 
     default:
       break;
@@ -85,41 +97,56 @@ export const chooseFormTypes = (
 };
 
 export const generateField = (
-  { errors, touched }: FormikProps<UpdateFormData>,
-  field: UpdateField,
+  { errors, touched }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
+  field: FieldType,
   language: languageOptions = 'en'
 ) => (
-  <div className="form-row" key={field.name}>
-    {field.title ? (
-      <label
-        htmlFor={field.name}
-        style={
-          field.type === 'checkbox'
-            ? { alignSelf: 'flex-start', marginTop: 10 }
-            : {}
-        }
-      >
-        {field.title}
-        {field.required ? <span> *</span> : null}
-      </label>
-    ) : (
-      <div> </div>
-    )}
-    <div className="form-field">
-      {chooseFormTypes(field, language)}
-      {field.note ? <div className="form-note">{field.note}</div> : null}
-      {errors[field.name as keyof UpdateFormData] &&
-      touched[field.name as keyof UpdateFormData] ? (
-        <div className="form-error">
-          {errors[field.name as keyof UpdateFormData]}
-        </div>
-      ) : null}
+  <div className="field" key={field.name}>
+    {field.question ? <div className="question">{field.question}</div> : null}
+    {field.statement ? (
+      <div className="statement">{field.statement}</div>
+    ) : null}
+    {field.statement2 ? (
+      <div className="statement">{field.statement2}</div>
+    ) : null}
+    {field.statement3 ? (
+      <div className="statement">{field.statement3}</div>
+    ) : null}
+    {field.statement4 ? (
+      <div className="statement">{field.statement4}</div>
+    ) : null}
+    <div className="form-row">
+      {field.title ? (
+        <label
+          htmlFor={field.name}
+          style={
+            field.type === 'checkbox'
+              ? { alignSelf: 'flex-start', marginTop: 10 }
+              : {}
+          }
+        >
+          {field.title}
+          {field.required ? <span> *</span> : null}
+        </label>
+      ) : (
+        <div> </div>
+      )}
+      <div className="form-field">
+        {chooseFormTypes(field, language)}
+        {field.note ? <div className="form-note">{field.note}</div> : null}
+        {errors[field.name as keyof (UpdateFormData | ApplyFormData)] &&
+        touched[field.name as keyof (UpdateFormData | ApplyFormData)] ? (
+          <div className="form-error">
+            {errors[field.name as keyof (UpdateFormData | ApplyFormData)]}
+          </div>
+        ) : null}
+      </div>
     </div>
   </div>
 );
 
 export const generateAddressField = (
-  formik: FormikProps<UpdateFormData>,
+  formik: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
   language: languageOptions
 ) => {
   const addressFieldsEN = [

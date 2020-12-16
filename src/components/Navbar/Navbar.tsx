@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import styles from './Navbar.module.css';
 import logo from '../../assets/logo.png';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ContextProps, languageOptions } from '../../store/LanguageProvider';
 
 const ACTIVE_STYLE = {
@@ -13,7 +13,7 @@ export default function Navbar({
   language,
   setLanguage
 }: ContextProps): ReactElement {
-  // const history = useHistory();
+  const history = useHistory();
 
   const changeLanguage = (lang: languageOptions) => {
     if (lang !== language) setLanguage(lang);
@@ -25,26 +25,28 @@ export default function Navbar({
         <img src={logo} alt="logo" />
       </div>
       <div className={styles.Options}>
-        {/* <div className={styles.Form} onClick={() => history.push('/apply')}>
-          Apply
+        <div className={styles.Form} onClick={() => history.push('/apply')}>
+          {language === 'en' ? 'Apply' : '申請'}
         </div>
         <div className={styles.Form} onClick={() => history.push('/update')}>
-          Update
-        </div> */}
-        <div
-          className={styles.Language}
-          style={language === 'en' ? ACTIVE_STYLE : {}}
-          onClick={() => changeLanguage('en')}
-        >
-          EN
+          {language === 'en' ? 'Update' : '更新'}
         </div>
-        <div>|</div>
-        <div
-          className={styles.Language}
-          style={language === 'hk' ? ACTIVE_STYLE : {}}
-          onClick={() => changeLanguage('hk')}
-        >
-          中
+        <div className={styles.Languages}>
+          <div
+            className={styles.Language}
+            style={language === 'en' ? ACTIVE_STYLE : {}}
+            onClick={() => changeLanguage('en')}
+          >
+            EN
+          </div>
+          <div>|</div>
+          <div
+            className={styles.Language}
+            style={language === 'hk' ? ACTIVE_STYLE : {}}
+            onClick={() => changeLanguage('hk')}
+          >
+            中
+          </div>
         </div>
       </div>
     </nav>

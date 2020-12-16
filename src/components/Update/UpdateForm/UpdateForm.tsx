@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './UpdateForm.module.css';
 import {
-  UpdateField,
   PARTICULARS_EN,
   PARTICULARS_HK,
   UPDATE_INFO_EN,
@@ -16,6 +15,8 @@ import {
   generateField
 } from '../../formFields/formUtils';
 import { languageContext } from '../../../store/LanguageProvider';
+import { FieldType } from '../../formFields/Types';
+import { REQUIRED_EN, REQUIRED_HK } from '../../formFields/applyFields';
 
 export type UpdateFormData = {
   firstName: string;
@@ -74,10 +75,12 @@ export default function UpdateForm(): ReactElement {
   let PARTICULARS = PARTICULARS_EN;
   let UPDATE_INFO = UPDATE_INFO_EN;
   let UPDATE_FORM_CONTENT = UPDATE_FORM_CONTENT_EN;
+  let REQUIRED = REQUIRED_EN;
   if (language === 'hk') {
     PARTICULARS = PARTICULARS_HK;
     UPDATE_INFO = UPDATE_INFO_HK;
     UPDATE_FORM_CONTENT = UPDATE_FORM_CONTENT_HK;
+    REQUIRED = REQUIRED_HK;
   }
 
   const initialValues = {
@@ -100,11 +103,11 @@ export default function UpdateForm(): ReactElement {
   };
 
   const validationSchema = Yup.object({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    title: Yup.string().required('Required'),
+    firstName: Yup.string().required(REQUIRED),
+    lastName: Yup.string().required(REQUIRED),
+    title: Yup.string().required(REQUIRED),
     hkidNumber: Yup.string()
-      .required('Required')
+      .required(REQUIRED)
       .test(
         'len',
         'Must be exactly 4 digits',
@@ -112,7 +115,7 @@ export default function UpdateForm(): ReactElement {
       ),
     contactNumber: Yup.number()
       .typeError('it must be number')
-      .required('Required')
+      .required(REQUIRED)
       .test(
         'len',
         'Must be exactly 8 digits',
@@ -149,18 +152,16 @@ export default function UpdateForm(): ReactElement {
           onSubmit={onSubmit}
         >
           {(formik: FormikProps<UpdateFormData>) => {
-            console.log(formik);
-
             return (
               <Form>
-                {PARTICULARS.map((field: UpdateField) =>
+                {PARTICULARS.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
                 <div className={styles.Box} />
                 <h1>{UPDATE_FORM_CONTENT.updateTitle}</h1>
                 <h2>{UPDATE_FORM_CONTENT.updateSubtitle}</h2>
                 {generateAddressField(formik, language)}
-                {UPDATE_INFO.map((field: UpdateField) =>
+                {UPDATE_INFO.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
                 <div className={styles.Statement}>

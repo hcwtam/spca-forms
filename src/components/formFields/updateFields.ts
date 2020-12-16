@@ -1,15 +1,6 @@
-export type UpdateField = {
-  title?: string;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  options?: string[];
-  required: boolean;
-  note?: string;
-  as?: string;
-};
+import { FieldType } from './Types';
 
-export const PARTICULARS_EN: UpdateField[] = [
+export const PARTICULARS_EN: FieldType[] = [
   {
     title: 'First Name',
     name: 'firstName',
@@ -48,7 +39,7 @@ export const PARTICULARS_EN: UpdateField[] = [
     required: true
   }
 ];
-export const PARTICULARS_HK: UpdateField[] = [
+export const PARTICULARS_HK: FieldType[] = [
   {
     title: '姓氏',
     name: 'firstName',
@@ -87,7 +78,7 @@ export const PARTICULARS_HK: UpdateField[] = [
   }
 ];
 
-export const UPDATE_INFO_EN: UpdateField[] = [
+export const UPDATE_INFO_EN: FieldType[] = [
   {
     title: 'Email',
     name: 'email',
@@ -131,7 +122,7 @@ export const UPDATE_INFO_EN: UpdateField[] = [
   }
 ];
 
-export const UPDATE_INFO_HK: UpdateField[] = [
+export const UPDATE_INFO_HK: FieldType[] = [
   {
     title: '電郵',
     name: 'email',

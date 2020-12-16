@@ -1,4 +1,4 @@
-.ApplyForm {
+.Form {
     width: 850px;
     padding: 30px 50px 50px;
     margin: 20px 0 50px;
@@ -10,23 +10,39 @@
     align-items: center;
 }
 
-.ApplyForm h1 {
+.Form h1 {
     text-align: center;
     width: 95%;
     font-size: 1.5rem;
     font-weight: 600;
-    padding-bottom: 20px;
-color: #3FA2F7;
-border-bottom: 1px solid #eee;
+    padding: 20px 0 20px;
+    color: #3FA2F7;
+    border-bottom: 1px solid #eee;
 }
 
-.ApplyForm h2 {
+.Form h2 {
     color: rgba(142, 142, 142, 1);
     font-size: 17px;
     font-weight: 600;
     line-height: 20px;
     margin: 0 40px 20px;
     text-align: center;
+}
+
+.Form span {
+    color: rgb(221, 29, 29);
+    font-weight: bold;
+}
+
+.Box {
+    height: 50px;
+}
+
+.Statement {
+    color: #999;
+    font-size: 0.75rem;
+    line-height: 1.8;
+    margin: 20px 0;
 }
 
 .Button {
@@ -44,4 +60,15 @@ border-bottom: 1px solid #eee;
 .Button:disabled {
     background-color: #b2dffc;
     cursor: inherit
+}
+
+@media (max-width: 850px) {
+    .Form {
+        width: 100%;
+        padding: 30px 8% 50px;
+    }
+
+    .Form h2 {
+        font-size: 0.9rem;
+    }
 }

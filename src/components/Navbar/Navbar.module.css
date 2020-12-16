@@ -18,7 +18,7 @@
 
 .Options {
     font-size: 14px;
-    width: 70px;
+    width: 230px;
     margin-right: 20px;;
     color: white;
     display: flex;
@@ -40,6 +40,13 @@
     text-shadow: 0 0 1px white;
 }
 
+.Languages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px
+}
+
 .Language {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.6);
@@ -56,8 +63,14 @@ color: white;
         padding: 0 10px;
     }
 
+    .Options {
+        width: 180px;
+        font-size: 13px;
+    }
+
     .Form {
-        margin: 0 5px 0 0;
+        margin: 0;
+        font-size: 13.5px;
     }
 
     .LogoContainer {
