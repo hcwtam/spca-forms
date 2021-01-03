@@ -238,8 +238,8 @@ export default function ApplyForm(): ReactElement {
                     setNAR: () => setNARChecked((prev) => !prev)
                   }}
                 />
-                <HasIllness formik={formik} questionNumber={18} />
-                <Occupation formik={formik} questionNumber={19} />
+                <Occupation formik={formik} questionNumber={18} />
+                <HasIllness formik={formik} questionNumber={19} />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>
                   generateField(formik, field, language)

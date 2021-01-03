@@ -38,7 +38,6 @@ const NAR = {
     'Charity Sales',
     'Administrative Work',
     'Graphic Design',
-    'Artwork Design',
     'IT-related Support',
     'Editing/Translation Work'
   ],

@@ -99,17 +99,6 @@ export default function Occupation({
           <div className="form-row">
             {field2.title ? (
               <label htmlFor={field2.name}>
-                {questionNumber > 0 ? (
-                  <span
-                    style={{
-                      marginRight: 10,
-                      color: '#555555',
-                      fontWeight: 400
-                    }}
-                  >
-                    {questionNumber}.
-                  </span>
-                ) : null}
                 {field2.title}
                 {field2.required ? <span> *</span> : null}
               </label>
