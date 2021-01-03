@@ -14,4 +14,5 @@ export type FieldType = {
   as?: string;
   footnote1?: string;
   footnote2?: string;
+  extendedInput?: boolean;
 };

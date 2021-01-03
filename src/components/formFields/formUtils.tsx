@@ -24,49 +24,69 @@ export const chooseFormTypes = (
     case 'checkbox':
       return (
         <Field name={field.name} key={field.name}>
-          {({ field: fieldProps, form }: FieldProps<any>) => (
-            <>
-              <div className="checkbox-buttons">
-                <div
-                  className="checkbox-button"
-                  onClick={() => form.setFieldValue(field.name, field.options)}
-                >
-                  {language === 'en' ? 'All' : '全選'}
-                </div>
-                <div>{' | '}</div>
-                <div
-                  className="checkbox-button"
-                  onClick={() => form.setFieldValue(field.name, [])}
-                >
-                  {language === 'en' ? 'Clear' : '清除'}
-                </div>
-              </div>
-              <div className={field.type}>
-                {field.options?.map((option) => (
-                  <label key={option}>
-                    <Field
-                      type={field.type}
-                      name={field.name}
-                      value={option}
-                      checked={fieldProps.value.includes(option)}
-                      onChange={() => {
-                        if (fieldProps.value.includes(option)) {
-                          const nextValue = fieldProps.value.filter(
-                            (value: string): boolean => value !== option
-                          );
-                          form.setFieldValue(field.name, nextValue);
-                        } else {
-                          const nextValue = fieldProps.value.concat(option);
-                          form.setFieldValue(field.name, nextValue);
-                        }
-                      }}
-                    />
-                    {option}
-                  </label>
-                ))}
-              </div>
-            </>
-          )}
+          {({ field: fieldProps, form }: FieldProps<any>) => {
+            if (field.options) {
+              const lastOption = field.options[field.options.length - 1];
+              return (
+                <>
+                  <div className="checkbox-buttons">
+                    <div
+                      className="checkbox-button"
+                      onClick={() =>
+                        form.setFieldValue(field.name, field.options)
+                      }
+                    >
+                      {language === 'en' ? 'All' : '全選'}
+                    </div>
+                    <div>{' | '}</div>
+                    <div
+                      className="checkbox-button"
+                      onClick={() => form.setFieldValue(field.name, [])}
+                    >
+                      {language === 'en' ? 'Clear' : '清除'}
+                    </div>
+                  </div>
+                  <div className={field.type}>
+                    {field.options?.map((option) => {
+                      return (
+                        <label key={option}>
+                          <Field
+                            type={field.type}
+                            name={field.name}
+                            value={option}
+                            checked={fieldProps.value.includes(option)}
+                            onChange={() => {
+                              if (fieldProps.value.includes(option)) {
+                                const nextValue = fieldProps.value.filter(
+                                  (value: string): boolean => value !== option
+                                );
+                                form.setFieldValue(field.name, nextValue);
+                              } else {
+                                const nextValue = fieldProps.value.concat(
+                                  option
+                                );
+                                form.setFieldValue(field.name, nextValue);
+                              }
+                            }}
+                          />
+                          {option}{' '}
+                          {field.extendedInput &&
+                          option === lastOption &&
+                          fieldProps.value.includes(lastOption) ? (
+                            <Field
+                              type="text"
+                              name={field.name + 'Others'}
+                              placeholder="Please specify"
+                            />
+                          ) : null}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </>
+              );
+            }
+          }}
         </Field>
       );
     case 'text':
@@ -99,7 +119,8 @@ export const chooseFormTypes = (
 export const generateField = (
   { errors, touched }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
   field: FieldType,
-  language: languageOptions = 'en'
+  language: languageOptions = 'en',
+  questionNumber: number = 0
 ) => (
   <div className="field" key={field.name}>
     {field.question ? <div className="question">{field.question}</div> : null}
@@ -125,6 +146,13 @@ export const generateField = (
               : {}
           }
         >
+          {questionNumber > 0 ? (
+            <span
+              style={{ marginRight: 10, color: '#555555', fontWeight: 400 }}
+            >
+              {questionNumber}.
+            </span>
+          ) : null}
           {field.title}
           {field.required ? <span> *</span> : null}
         </label>

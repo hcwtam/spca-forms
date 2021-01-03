@@ -25,6 +25,7 @@ form {
 label {
   font-weight: 600;
   color: #555;
+  margin-bottom: 10px;
 }
 
 input[type='text'],
@@ -76,8 +77,9 @@ input::placeholder {
 .form-row {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .radio, .checkbox {
@@ -123,12 +125,12 @@ input::placeholder {
 }
 
 .form-field {
-  width: 70%;
+  width: 100%;
   margin: 5px 0;
 }
 
 .form-field3 {
-  width: 70%;
+  width: 100%;
   margin: 5px 0;
   display: flex;
   justify-content: space-between;

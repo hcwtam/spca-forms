@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
@@ -25,6 +25,9 @@ import {
 import { generateField } from '../../formFields/formUtils';
 import { languageContext } from '../../../store/LanguageProvider';
 import { FieldType } from '../../formFields/Types';
+import Occupation from './Occupation';
+import HasIllness from './HasIllness';
+import ServiceTypes from './ServiceTypes';
 
 export type ApplyFormData = {
   isMember: string;
@@ -44,10 +47,15 @@ export type ApplyFormData = {
   experience?: number;
   hasPets: string;
   petTypes: string[];
+  petTypesOthers?: string;
   days?: string[];
-  serviceTypes?: string[];
+  serviceTypesAR?: string[];
+  serviceTypesNAR?: string[];
   hasIllness: string;
   illnesses: string;
+  occupation: string;
+  industry?: string;
+  occupationOthers?: string;
   infoCollect1: string;
   infoCollect2: string;
   compensation: string;
@@ -79,6 +87,8 @@ const APPLY_FORM_CONTENT_HK = {
 };
 
 export default function ApplyForm(): ReactElement {
+  const [ARChecked, setARChecked] = useState<boolean>(false);
+  const [NARChecked, setNARChecked] = useState<boolean>(false);
   const history = useHistory();
   const { language } = useContext(languageContext);
   let PARTICULARS = PARTICULARS_EN;
@@ -120,10 +130,15 @@ export default function ApplyForm(): ReactElement {
     experience: 0,
     hasPets: '',
     petTypes: [],
+    petTypesOthers: '',
     days: [],
-    serviceTypes: [],
+    serviceTypesAR: [],
+    serviceTypesNAR: [],
     hasIllness: '',
     illnesses: '',
+    occupation: '',
+    industry: '',
+    occupationOthers: '',
     infoCollect1: '',
     infoCollect2: '',
     compensation: '',
@@ -171,10 +186,15 @@ export default function ApplyForm(): ReactElement {
     language: Yup.string().required(REQUIRED),
     hasPets: Yup.string().required(REQUIRED),
     petTypes: Yup.array(),
+    petTypesOthers: Yup.string(),
     days: Yup.array().required(REQUIRED),
-    serviceTypes: Yup.array().required(REQUIRED),
+    serviceTypesAR: Yup.array(),
+    serviceTypesNAR: Yup.array(),
     hasIllness: Yup.string().required(REQUIRED),
     illnesses: Yup.string(),
+    occupation: Yup.string().required(REQUIRED),
+    industry: Yup.string(),
+    occupationOthers: Yup.string(),
     infoCollect1: Yup.string().required(REQUIRED),
     infoCollect2: Yup.string().required(REQUIRED),
     compensation: Yup.string().required(REQUIRED),
@@ -200,31 +220,48 @@ export default function ApplyForm(): ReactElement {
           {(formik: FormikProps<ApplyFormData>) => {
             return (
               <Form>
-                {PARTICULARS.map((field: FieldType) =>
-                  generateField(formik, field, language)
+                {PARTICULARS.map((field: FieldType, index) =>
+                  generateField(formik, field, language, 1 + index)
                 )}
                 <div className={styles.Box} />
                 <h1>{APPLY_FORM_CONTENT.volunteerInfoTitle}</h1>
-                {APPLY_INFO.map((field: FieldType) =>
-                  generateField(formik, field, language)
+                {APPLY_INFO.map((field: FieldType, index) =>
+                  generateField(formik, field, language, 12 + index)
                 )}
+                <ServiceTypes
+                  formik={formik}
+                  questionNumber={17}
+                  states={{
+                    ARChecked,
+                    setAR: () => setARChecked((prev) => !prev),
+                    NARChecked,
+                    setNAR: () => setNARChecked((prev) => !prev)
+                  }}
+                />
+                <HasIllness formik={formik} questionNumber={18} />
+                <Occupation formik={formik} questionNumber={19} />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
 
-                <h1>{APPLY_FORM_CONTENT.compensationTitle}</h1>
-                {COMPENSATION.map((field: FieldType) =>
-                  generateField(formik, field, language)
-                )}
-                <h1>{APPLY_FORM_CONTENT.tetanusTitle}</h1>
-                {TETANUS.map((field: FieldType) =>
-                  generateField(formik, field, language)
-                )}
-                <h1>{APPLY_FORM_CONTENT.rabiesTitle}</h1>
-                {RABIES.map((field: FieldType) =>
-                  generateField(formik, field, language)
-                )}
+                {formik.values.serviceTypesAR &&
+                formik.values.serviceTypesAR.length ? (
+                  <>
+                    <h1>{APPLY_FORM_CONTENT.compensationTitle}</h1>
+                    {COMPENSATION.map((field: FieldType) =>
+                      generateField(formik, field, language)
+                    )}
+                    <h1>{APPLY_FORM_CONTENT.tetanusTitle}</h1>
+                    {TETANUS.map((field: FieldType) =>
+                      generateField(formik, field, language)
+                    )}
+                    <h1>{APPLY_FORM_CONTENT.rabiesTitle}</h1>
+                    {RABIES.map((field: FieldType) =>
+                      generateField(formik, field, language)
+                    )}
+                  </>
+                ) : null}
                 <h1>{APPLY_FORM_CONTENT.declarationTitle}</h1>
                 {DECLARATION.map((field: FieldType) =>
                   generateField(formik, field, language)

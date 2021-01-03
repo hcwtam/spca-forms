@@ -18,7 +18,7 @@ function App() {
         <Route path="/apply" component={Apply} />
         <Route path="/update" component={Update} />
         <Route path="/success" component={Success} />
-        <Redirect to="/update" />
+        <Redirect to="/apply" />
       </Switch>
       <Footer />
     </div>
