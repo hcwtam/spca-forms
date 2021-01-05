@@ -123,19 +123,33 @@ export const generateField = (
   questionNumber: number = 0
 ) => (
   <div className="field" key={field.name}>
-    {field.question ? <div className="question">{field.question}</div> : null}
-    {field.statement ? (
-      <div className="statement">{field.statement}</div>
-    ) : null}
-    {field.statement2 ? (
-      <div className="statement">{field.statement2}</div>
-    ) : null}
-    {field.statement3 ? (
-      <div className="statement">{field.statement3}</div>
-    ) : null}
-    {field.statement4 ? (
-      <div className="statement">{field.statement4}</div>
-    ) : null}
+    <div>
+      {field.question ? <div className="question">{field.question}</div> : null}
+      {field.statement ? (
+        <div className="statement">
+          {field.statement}
+          {!field.statement2 && field.required ? <span> *</span> : null}
+        </div>
+      ) : null}
+      {field.statement2 ? (
+        <div className="statement">
+          {field.statement2}
+          {!field.statement3 && field.required ? <span> *</span> : null}
+        </div>
+      ) : null}
+      {field.statement3 ? (
+        <div className="statement">
+          {field.statement3}
+          {!field.statement4 && field.required ? <span> *</span> : null}
+        </div>
+      ) : null}
+      {field.statement4 ? (
+        <div className="statement">
+          {field.statement4}
+          {field.required ? <span> *</span> : null}
+        </div>
+      ) : null}
+    </div>
     <div className="form-row">
       {field.title ? (
         <label
@@ -154,7 +168,7 @@ export const generateField = (
             </span>
           ) : null}
           {field.title}
-          {field.required ? <span> *</span> : null}
+          {field.title && field.required ? <span> *</span> : null}
         </label>
       ) : (
         <div> </div>

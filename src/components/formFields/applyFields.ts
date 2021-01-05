@@ -282,7 +282,6 @@ export const INFO_COLLECTION_EN: FieldType[] = [
   {
     statement:
       'Changes have been made to the Personal Data (Privacy) Ordinance. The information provided will only be used for enrolment and further correspondence as volunteers of the Society for the Prevention of Cruelty to Animals (Hong Kong). Apart from personnel duly authorized by the SPCA (HK), no one will be given access to your personal information. The SPCA (HK) hopes that you continue to support our work and that we may continue to use your personal data provided for these purposes.',
-    title: ' ',
     name: 'infoCollect1',
     type: 'radio',
     options: ['Agree', 'Disagree'],
@@ -291,7 +290,6 @@ export const INFO_COLLECTION_EN: FieldType[] = [
   {
     statement:
       'You agree to receive information regarding the animal welfare works, fundraising, promotional and other activities of the Society for the Prevention of Cruelty to Animals (Hong Kong). Apart from personnel duly authorized by the SPCA (HK), no one will be given access to your personal information. The SPCA (HK) hopes that you continue to support our work and that we may continue to use your personal data provided for these purposes.',
-    title: ' ',
     name: 'infoCollect2',
     type: 'radio',
     options: ['Agree', 'Disagree'],
@@ -330,7 +328,7 @@ export const COMPENSATION_EN: FieldType[] = [
       'If communication problems develop between SPCA (HK) employees and myself, as a volunteer I will report these to the programme leader as soon as possible. I agree to inform the Volunteer Coordinator in advance and as soon as possible if I am unable to fulfil the tasks I have been assigned. I will take ideas, constructive comments, suggestions and criticisms directly to the programme leader and agree to be supervised by the programme leader.',
     statement4:
       'I understand that the SPCA (HK) records regarding previous and new owners, members and other volunteers are to be kept confidential. The SPCA (HK) has my permission to use any and all photographs taken of me to promote Society services and programmes or to publicise any event. I understand that all prints and negatives become the sole property of the SPCA (HK) and may be used without payment or prior notification. I attest to having read, understood and agreed to the above.',
-    title: ' ',
+
     name: 'compensation',
     type: 'radio',
     options: ['Agree', 'Disagree'],
@@ -360,7 +358,7 @@ export const TETANUS_EN: FieldType[] = [
   {
     statement:
       'The SPCA (HK) feels it is important for all volunteers to be current on their tetanus vaccination if they will be handling animals as a SPCA (HK) volunteer. If a volunteer has questions about the tetanus vaccination, he or she is encouraged to consult a physician, at his or her own expense, to decide whether or not to be vaccinated against tetanus.',
-    title: ' ',
+
     name: 'tetanus',
     type: 'radio',
     options: ['Agree', 'Disagree'],
@@ -384,7 +382,7 @@ export const RABIES_EN: FieldType[] = [
   {
     statement:
       'SPCA (HK) volunteers may discuss the rabies vaccination series with a physician, at their own expense, prior to making a decision on whether or not to pursue this pre-exposure rabies vaccination series. I have read, understand and agree to the above. Furthermore, I release the SPCA (HK) from any responsibility that may occur because of my not being vaccinated against tetanus and / or rabies and I understand that whatever decision I make regarding a tetanus and / or rabies any vaccination is at my own risk.',
-    title: ' ',
+
     name: 'rabies',
     type: 'radio',
     options: ['Agree', 'Disagree'],
@@ -407,7 +405,7 @@ export const DECLARATION_EN = [
   {
     statement:
       'I the undersigned, declares to be over sixteen years of age and holders of a Hong Kong Identity Card, and that the information provided on this application is true and correct. The undersigned agrees to bear legal liability for any false and incorrect information.',
-    title: ' ',
+
     name: 'declaration',
     type: 'radio',
     options: ['Agree', 'Disagree'],
