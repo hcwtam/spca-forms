@@ -54,6 +54,7 @@ export type ApplyFormData = {
   illnesses: string;
   occupation: string;
   industry?: string;
+  industryOthers?: string;
   occupationOthers?: string;
   infoCollect1: string;
   infoCollect2: string;
@@ -133,6 +134,7 @@ export default function ApplyForm(): ReactElement {
     illnesses: '',
     occupation: '',
     industry: '',
+    industryOthers: '',
     occupationOthers: '',
     infoCollect1: '',
     infoCollect2: '',
@@ -180,6 +182,7 @@ export default function ApplyForm(): ReactElement {
     occupation: Yup.string().required(REQUIRED),
     occupationOthers: Yup.string(),
     industry: Yup.string(),
+    industryOthers: Yup.string(),
     hasIllness: Yup.string().required(REQUIRED),
     illnesses: Yup.string(),
     infoCollect1: Yup.string()

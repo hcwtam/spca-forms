@@ -42,8 +42,9 @@ const INDUSTRY = {
     'Health Services',
     'Engineering',
     'Architecture',
-    'Social Walfare',
-    'Tourism'
+    'Social Welfare',
+    'Tourism',
+    'Others'
   ],
   required: true
 };
@@ -119,6 +120,13 @@ export default function Occupation({
                     ]
                   }
                 </div>
+              ) : null}
+              {formik.values.industry === 'Others' ? (
+                <Field
+                  type="text"
+                  name="industryOthers"
+                  placeholder="Please specify"
+                />
               ) : null}
             </div>
           </div>
