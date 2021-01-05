@@ -6,12 +6,6 @@ import { ApplyFormData } from './ApplyForm';
 interface Props {
   formik: FormikProps<ApplyFormData>;
   questionNumber: number;
-  states: {
-    ARChecked: boolean;
-    setAR: () => void;
-    NARChecked: boolean;
-    setNAR: () => void;
-  };
 }
 
 const AR = {
@@ -24,10 +18,7 @@ const AR = {
     'Cat Colony Care Programme (CCCP) Carer',
     'Community Dog Programme (CDP) Carer'
   ],
-  required: false,
-  footnote1: '[i] Kennel Keeper: 9am – 12noon kennel cleaning',
-  footnote2:
-    '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
+  required: false
 };
 
 const NAR = {
@@ -41,15 +32,16 @@ const NAR = {
     'IT-related Support',
     'Editing/Translation Work'
   ],
-  required: false
+  required: false,
+  footnote1: '[i] Kennel Keeper: 9am – 12noon kennel cleaning',
+  footnote2:
+    '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
 };
 
 export default function ServiceTypes({
   formik,
-  questionNumber,
-  states
+  questionNumber
 }: Props): ReactElement {
-  const { ARChecked, NARChecked, setAR, setNAR } = states;
   return (
     <div
       style={{
@@ -72,25 +64,37 @@ export default function ServiceTypes({
                 {questionNumber}.
               </span>
             ) : null}
-            What kind of volunteer activities are you interested in?
+            What kind of volunteer activities are you interested in?{' '}
+            <span> *</span>
           </label>
         </div>
       </div>
-      <div className="form-field">
-        <div className="checkbox">
-          <label>
-            <input type="checkbox" onClick={setAR} /> Animal-related duties (AR)
-          </label>
-        </div>
-      </div>
-      {ARChecked && generateField(formik, AR, 'en', 0)}
-      <div className="checkbox">
-        <label>
-          <input type="checkbox" onClick={setNAR} /> Non-animal related duties
-          (NAR)
-        </label>
-      </div>
-      {NARChecked && generateField(formik, NAR, 'en', 0)}
+
+      <h2
+        style={{
+          textAlign: 'left',
+          marginLeft: 0,
+          textDecoration: 'underline',
+          marginBottom: -10,
+          color: '#777777'
+        }}
+      >
+        Animal-related duties (AR)
+      </h2>
+      {generateField(formik, AR, 'en', 0)}
+      <h2
+        style={{
+          textAlign: 'left',
+          marginLeft: 0,
+          textDecoration: 'underline',
+          marginTop: 60,
+          marginBottom: -10,
+          color: '#777777'
+        }}
+      >
+        Non-animal related duties (NAR)
+      </h2>
+      {generateField(formik, NAR, 'en', 0)}
     </div>
   );
 }

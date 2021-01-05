@@ -187,24 +187,7 @@ export const APPLY_INFO_EN: FieldType[] = [
     required: true,
     note: 'Please type in years of volunteering experience'
   },
-  {
-    title: 'Do you have any pets?',
-    name: 'hasPets',
-    type: 'radio',
-    options: ['Yes', 'No'],
-    required: true
-  },
 
-  {
-    title: 'Pet Types',
-    name: 'petTypes',
-    type: 'checkbox',
-    options: ['Dog', 'Cat', 'Others'],
-    required: false,
-    extendedInput: true,
-    note:
-      'If you have pets, please select the types of pets you own. If not, please leave this field blank.'
-  },
   {
     title: 'On which days do you prefer to join our activities?',
     name: 'days',

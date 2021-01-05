@@ -17,7 +17,7 @@ const OCCUPATION = {
   options: [
     'Management',
     'Service',
-    'Admin',
+    'Administrative',
     'Technical',
     'Professional',
     'Not applicable',
@@ -31,18 +31,18 @@ const INDUSTRY = {
   name: 'industry',
   type: 'radio',
   options: [
-    'Financial Service',
+    'Financial Services',
     'IT',
     'Insurance',
-    'Airline',
+    'Aviation',
     'Education',
     'Law',
-    'Audit',
+    'Accountancy',
     'Medical',
     'Health Services',
     'Engineering',
-    'Architectural',
-    'Docial Walfare',
+    'Architecture',
+    'Social Walfare',
     'Tourism'
   ],
   required: true

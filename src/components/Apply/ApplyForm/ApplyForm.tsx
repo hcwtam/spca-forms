@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
@@ -28,14 +28,13 @@ import { FieldType } from '../../formFields/Types';
 import Occupation from './Occupation';
 import HasIllness from './HasIllness';
 import ServiceTypes from './ServiceTypes';
+import HasPets from './HasPets';
 
 export type ApplyFormData = {
   isMember: string;
-  membershipNo?: string;
   firstName: string;
   lastName: string;
   title: string;
-  hkidNumber: string;
   dateOfBirth: string;
   contactNumber: string;
   email: string;
@@ -87,8 +86,6 @@ const APPLY_FORM_CONTENT_HK = {
 };
 
 export default function ApplyForm(): ReactElement {
-  const [ARChecked, setARChecked] = useState<boolean>(false);
-  const [NARChecked, setNARChecked] = useState<boolean>(false);
   const history = useHistory();
   const { language } = useContext(languageContext);
   let PARTICULARS = PARTICULARS_EN;
@@ -114,11 +111,9 @@ export default function ApplyForm(): ReactElement {
 
   const initialValues = {
     isMember: '',
-    membershipNo: '',
     firstName: '',
     lastName: '',
     title: '',
-    hkidNumber: '',
     dateOfBirth: '',
     contactNumber: '',
     email: '',
@@ -148,20 +143,10 @@ export default function ApplyForm(): ReactElement {
   };
 
   const validationSchema = Yup.object({
-    isMember: Yup.string().required(REQUIRED),
-    membershipNo: Yup.string(),
     firstName: Yup.string().required(REQUIRED),
     lastName: Yup.string().required(REQUIRED),
     title: Yup.string().required(REQUIRED),
-    hkidNumber: Yup.string()
-      .required(REQUIRED)
-      .test(
-        'len',
-        'Must be exactly 8 digits',
-        (val) => val?.toString().length === 4
-      ),
     dateOfBirth: Yup.string().required(REQUIRED),
-
     contactNumber: Yup.number()
       .typeError('it must be number')
       .required(REQUIRED)
@@ -172,6 +157,7 @@ export default function ApplyForm(): ReactElement {
       ),
     email: Yup.string().email().required(REQUIRED),
     region: Yup.string().required(REQUIRED),
+    isMember: Yup.string().required(REQUIRED),
     emergencyContact: Yup.string().required(REQUIRED),
     relationship: Yup.string().required(),
     emergencyNumber: Yup.number()
@@ -184,23 +170,51 @@ export default function ApplyForm(): ReactElement {
       ),
 
     language: Yup.string().required(REQUIRED),
-    hasPets: Yup.string().required(REQUIRED),
-    petTypes: Yup.array(),
-    petTypesOthers: Yup.string(),
+    experience: Yup.number().required(REQUIRED),
     days: Yup.array().required(REQUIRED),
     serviceTypesAR: Yup.array(),
     serviceTypesNAR: Yup.array(),
+    hasPets: Yup.string().required(REQUIRED),
+    petTypes: Yup.array(),
+    petTypesOthers: Yup.string(),
+    occupation: Yup.string().required(REQUIRED),
+    occupationOthers: Yup.string(),
+    industry: Yup.string(),
     hasIllness: Yup.string().required(REQUIRED),
     illnesses: Yup.string(),
-    occupation: Yup.string().required(REQUIRED),
-    industry: Yup.string(),
-    occupationOthers: Yup.string(),
-    infoCollect1: Yup.string().required(REQUIRED),
-    infoCollect2: Yup.string().required(REQUIRED),
-    compensation: Yup.string().required(REQUIRED),
-    tetanus: Yup.string().required(REQUIRED),
-    rabies: Yup.string().required(REQUIRED),
-    declaration: Yup.string().required(REQUIRED)
+    infoCollect1: Yup.string()
+      .required(REQUIRED)
+      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+    infoCollect2: Yup.string()
+      .required(REQUIRED)
+      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+    compensation: Yup.string()
+      .required(REQUIRED)
+      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+    tetanus: Yup.string().when('serviceTypesAR', {
+      is: (value) => value.length,
+      then: Yup.string()
+        .required(REQUIRED)
+        .oneOf(
+          ['Agree'],
+          'You must agree with the statement above to continue.'
+        ),
+      otherwise: Yup.string()
+    }),
+    rabies: Yup.string().when('serviceTypesAR', {
+      is: (value) => value.length,
+      then: Yup.string()
+        .required(REQUIRED)
+        .oneOf(
+          ['Agree'],
+          'You must agree with the statement above to continue.'
+        ),
+      otherwise: Yup.string()
+    }),
+
+    declaration: Yup.string()
+      .required(REQUIRED)
+      .oneOf(['Agree'], 'You must agree with the statement above to continue.')
   });
 
   const onSubmit = async (values: ApplyFormData) => {
@@ -228,30 +242,22 @@ export default function ApplyForm(): ReactElement {
                 {APPLY_INFO.map((field: FieldType, index) =>
                   generateField(formik, field, language, 12 + index)
                 )}
-                <ServiceTypes
-                  formik={formik}
-                  questionNumber={17}
-                  states={{
-                    ARChecked,
-                    setAR: () => setARChecked((prev) => !prev),
-                    NARChecked,
-                    setNAR: () => setNARChecked((prev) => !prev)
-                  }}
-                />
-                <Occupation formik={formik} questionNumber={18} />
-                <HasIllness formik={formik} questionNumber={19} />
+                <ServiceTypes formik={formik} questionNumber={15} />
+                <HasPets formik={formik} questionNumber={16} />
+                <Occupation formik={formik} questionNumber={17} />
+                <HasIllness formik={formik} questionNumber={18} />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
 
+                <h1>{APPLY_FORM_CONTENT.compensationTitle}</h1>
+                {COMPENSATION.map((field: FieldType) =>
+                  generateField(formik, field, language)
+                )}
                 {formik.values.serviceTypesAR &&
                 formik.values.serviceTypesAR.length ? (
                   <>
-                    <h1>{APPLY_FORM_CONTENT.compensationTitle}</h1>
-                    {COMPENSATION.map((field: FieldType) =>
-                      generateField(formik, field, language)
-                    )}
                     <h1>{APPLY_FORM_CONTENT.tetanusTitle}</h1>
                     {TETANUS.map((field: FieldType) =>
                       generateField(formik, field, language)
