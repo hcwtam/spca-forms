@@ -1,7 +1,8 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
+import Reward, { RewardElement } from 'react-rewards';
 
 import styles from './ApplyForm.module.css';
 import {
@@ -64,6 +65,18 @@ export type ApplyFormData = {
   declaration: string;
 };
 
+const REWARD_CONFIG = {
+  lifetime: 200,
+  angle: 90,
+  decay: 0.91,
+  spread: 150,
+  startVelocity: 20,
+  elementCount: 40,
+  elementSize: 10,
+  zIndex: 10,
+  springAnimation: true
+};
+
 const APPLY_FORM_CONTENT_EN = {
   particulars: 'Personal Particulars',
   volunteerInfoTitle: 'Volunteering Information',
@@ -89,6 +102,15 @@ const APPLY_FORM_CONTENT_HK = {
 export default function ApplyForm(): ReactElement {
   const history = useHistory();
   const { language } = useContext(languageContext);
+  const [rewardRef, setRewardRef] = useState<RewardElement | null>(null);
+
+  useEffect(() => {
+    if (rewardRef) {
+      rewardRef.rewardMe();
+      console.log(rewardRef);
+    }
+  }, [rewardRef]);
+
   let PARTICULARS = PARTICULARS_EN;
   let APPLY_INFO = APPLY_INFO_EN;
   let APPLY_FORM_CONTENT = APPLY_FORM_CONTENT_EN;
@@ -229,6 +251,15 @@ export default function ApplyForm(): ReactElement {
     <>
       <div className={styles.Form}>
         <h1>{APPLY_FORM_CONTENT.particulars}</h1>
+        <Reward
+          ref={(ref) => setRewardRef(ref)}
+          type={'confetti'}
+          config={REWARD_CONFIG}
+        >
+          <div className={styles.intro}>
+            Thank you for for joining the SPCA Volunteering Team!
+          </div>
+        </Reward>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -275,6 +306,7 @@ export default function ApplyForm(): ReactElement {
                 {DECLARATION.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
+                <div className={styles.outro}>THANK YOU!</div>
                 <button
                   className={styles.Button}
                   type="submit"

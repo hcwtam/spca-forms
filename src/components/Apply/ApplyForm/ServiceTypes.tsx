@@ -79,7 +79,7 @@ export default function ServiceTypes({
           color: '#777777'
         }}
       >
-        Animal-related duties (AR)
+        Animal Care Related Duties
       </h2>
       {generateField(formik, AR, 'en', 0)}
       <h2
@@ -92,7 +92,7 @@ export default function ServiceTypes({
           color: '#777777'
         }}
       >
-        Non-animal related duties (NAR)
+        General Duties
       </h2>
       {generateField(formik, NAR, 'en', 0)}
     </div>
