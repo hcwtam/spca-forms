@@ -36,7 +36,8 @@ export type ApplyFormData = {
   firstName: string;
   lastName: string;
   title: string;
-  dateOfBirth: string;
+  birthMonth: string;
+  birthYear: string;
   contactNumber: string;
   email: string;
   emergencyContact: string;
@@ -107,7 +108,6 @@ export default function ApplyForm(): ReactElement {
   useEffect(() => {
     if (rewardRef) {
       rewardRef.rewardMe();
-      console.log(rewardRef);
     }
   }, [rewardRef]);
 
@@ -137,7 +137,8 @@ export default function ApplyForm(): ReactElement {
     firstName: '',
     lastName: '',
     title: '',
-    dateOfBirth: '',
+    birthMonth: '',
+    birthYear: '',
     contactNumber: '',
     email: '',
     region: '',
@@ -170,7 +171,18 @@ export default function ApplyForm(): ReactElement {
     firstName: Yup.string().required(REQUIRED),
     lastName: Yup.string().required(REQUIRED),
     title: Yup.string().required(REQUIRED),
-    dateOfBirth: Yup.string().required(REQUIRED),
+    birthMonth: Yup.number()
+      .typeError('Incorrect value')
+      .required(REQUIRED)
+      .integer('Incorrect value')
+      .min(1, 'Incorrect value')
+      .max(12, 'Incorrect value'),
+    birthYear: Yup.number()
+      .typeError('Incorrect value')
+      .required(REQUIRED)
+      .integer('Incorrect value')
+      .min(1900, 'Incorrect value')
+      .max(2020, 'Incorrect value'),
     contactNumber: Yup.number()
       .typeError('it must be number')
       .required(REQUIRED)
@@ -278,6 +290,8 @@ export default function ApplyForm(): ReactElement {
           onSubmit={onSubmit}
         >
           {(formik: FormikProps<ApplyFormData>) => {
+            console.log(formik);
+
             return (
               <Form>
                 {PARTICULARS.map((field: FieldType, index) =>

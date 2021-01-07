@@ -1,15 +1,27 @@
-import { Field, FieldProps, FormikProps } from 'formik';
+import {
+  Field,
+  FieldProps,
+  FormikErrors,
+  FormikProps,
+  FormikTouched
+} from 'formik';
 import React from 'react';
 import { languageOptions } from '../../store/LanguageProvider';
 import { ApplyFormData } from '../Apply/ApplyForm/ApplyForm';
 import { UpdateFormData } from '../Update/UpdateForm/UpdateForm';
 import { FieldType } from './Types';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 export const ChooseFormTypes = (
   field: FieldType,
-  language: languageOptions
+  language: languageOptions,
+  errors:
+    | FormikErrors<UpdateFormData>
+    | FormikErrors<ApplyFormData>
+    | null = null,
+  touched:
+    | FormikTouched<UpdateFormData>
+    | FormikTouched<ApplyFormData>
+    | null = null
 ) => {
   let fieldComponent = null;
   switch (field.type) {
@@ -117,21 +129,63 @@ export const ChooseFormTypes = (
       break;
     case 'date':
       fieldComponent = (
-        <Field key={field.name} name={field.name} placeholder="dd/MM/yyyy">
-          {({ field: fieldProps, form }: FieldProps<any>) => {
-            return (
-              <DatePicker
-                selected={
-                  (fieldProps.value && new Date(fieldProps.value)) || null
-                }
-                onChange={(val) => {
-                  form.setFieldValue(field.name, val);
-                }}
-                placeholderText="Select date"
-              />
-            );
-          }}
-        </Field>
+        <>
+          <div
+            style={{
+              width: 300,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <Field
+              key="birthMonth"
+              name="birthMonth"
+              placeholder="MM"
+              style={{ width: 120 }}
+              type="text"
+            />
+            /
+            <Field
+              key="birthYear"
+              name="birthYear"
+              placeholder="yyyy"
+              style={{ width: 160 }}
+              type="text"
+            />
+          </div>
+          {errors && touched ? (
+            <div
+              style={{
+                width: 300,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <div className="form-error" style={{ width: 120 }}>
+                {errors[
+                  'birthMonth' as keyof (UpdateFormData | ApplyFormData)
+                ] &&
+                touched['birthMonth' as keyof (UpdateFormData | ApplyFormData)]
+                  ? errors[
+                      'birthMonth' as keyof (UpdateFormData | ApplyFormData)
+                    ]
+                  : ' '}
+              </div>
+              <div className="form-error" style={{ width: 160 }}>
+                {errors[
+                  'birthYear' as keyof (UpdateFormData | ApplyFormData)
+                ] &&
+                touched['birthYear' as keyof (UpdateFormData | ApplyFormData)]
+                  ? errors[
+                      'birthYear' as keyof (UpdateFormData | ApplyFormData)
+                    ]
+                  : ' '}
+              </div>
+            </div>
+          ) : null}
+        </>
       );
       break;
     default:
@@ -141,11 +195,7 @@ export const ChooseFormTypes = (
 };
 
 export const generateField = (
-  {
-    errors,
-    touched,
-    setFieldValue
-  }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
+  { errors, touched }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
   field: FieldType,
   language: languageOptions = 'en',
   questionNumber: number = 0
@@ -202,7 +252,7 @@ export const generateField = (
         <div> </div>
       )}
       <div className="form-field">
-        {ChooseFormTypes(field, language)}
+        {ChooseFormTypes(field, language, errors, touched)}
         {field.note ? <div className="form-note">{field.note}</div> : null}
         {errors[field.name as keyof (UpdateFormData | ApplyFormData)] &&
         touched[field.name as keyof (UpdateFormData | ApplyFormData)] ? (
