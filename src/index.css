@@ -29,7 +29,6 @@ label {
 }
 
 input[type='text'],
-input[type='date'],
 input[type='number']
  {
   margin: 3px 0;
@@ -176,7 +175,7 @@ input::placeholder {
 .statement {
   width: 100%;
   line-height: 1.9;
-  margin: 40px 0;
+  margin: 10px 0;
   color: #999;
   font-size: 0.9rem;
 }
@@ -184,9 +183,13 @@ input::placeholder {
 .footnote {
   width: 100%;
   line-height: 1.9;
-  margin: 40px 0;
+  margin: 10px 0;
   color: #999;
   font-size: 0.85rem;
+}
+
+.react-datepicker-wrapper {
+  width: 100% !important;
 }
 
 @media (max-width: 850px) {

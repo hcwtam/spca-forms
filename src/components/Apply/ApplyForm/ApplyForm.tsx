@@ -250,16 +250,28 @@ export default function ApplyForm(): ReactElement {
   return (
     <>
       <div className={styles.Form}>
-        <h1>{APPLY_FORM_CONTENT.particulars}</h1>
         <Reward
           ref={(ref) => setRewardRef(ref)}
           type={'confetti'}
           config={REWARD_CONFIG}
         >
           <div className={styles.intro}>
-            Thank you for for joining the SPCA Volunteering Team!
+            Thank you for your interest in donating your time and volunteering
+            for the SPCA!
           </div>
         </Reward>
+        <h2
+          style={{
+            color: '#666666',
+            borderBottom: '1px solid #eee',
+            width: '100%',
+            textAlign: 'center',
+            paddingBottom: 20
+          }}
+        >
+          Complete the form below to get started (all questions required)
+        </h2>
+        <h1>{APPLY_FORM_CONTENT.particulars}</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -306,7 +318,16 @@ export default function ApplyForm(): ReactElement {
                 {DECLARATION.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
-                <div className={styles.outro}>THANK YOU!</div>
+                <div className={styles.outro}>
+                  <h2>THANK YOU!</h2>
+                  <div>
+                    Your answers will help us find the best role for you.
+                  </div>{' '}
+                  <div>
+                    Please <strong>click the button below</strong> to submit
+                    your application.
+                  </div>
+                </div>
                 <button
                   className={styles.Button}
                   type="submit"

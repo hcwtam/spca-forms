@@ -1,6 +1,6 @@
 import { Field, FormikProps } from 'formik';
 import React, { ReactElement } from 'react';
-import { chooseFormTypes } from '../../formFields/formUtils';
+import { ChooseFormTypes } from '../../formFields/formUtils';
 import { FieldType } from '../../formFields/Types';
 import { UpdateFormData } from '../../Update/UpdateForm/UpdateForm';
 import { ApplyFormData } from './ApplyForm';
@@ -45,7 +45,7 @@ export default function HasIllness({
           <div> </div>
         )}
         <div className="form-field">
-          {chooseFormTypes(field, 'en')}
+          {ChooseFormTypes(field, 'en')}
           {errors[field.name as keyof (UpdateFormData | ApplyFormData)] &&
           touched[field.name as keyof (UpdateFormData | ApplyFormData)] ? (
             <div className="form-error">

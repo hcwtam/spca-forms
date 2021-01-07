@@ -4,14 +4,17 @@ import { languageOptions } from '../../store/LanguageProvider';
 import { ApplyFormData } from '../Apply/ApplyForm/ApplyForm';
 import { UpdateFormData } from '../Update/UpdateForm/UpdateForm';
 import { FieldType } from './Types';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export const chooseFormTypes = (
+export const ChooseFormTypes = (
   field: FieldType,
   language: languageOptions
 ) => {
+  let fieldComponent = null;
   switch (field.type) {
     case 'radio':
-      return (
+      fieldComponent = (
         <div className={field.type} key={field.name}>
           {field.options?.map((option) => (
             <label key={option}>
@@ -21,8 +24,9 @@ export const chooseFormTypes = (
           ))}
         </div>
       );
+      break;
     case 'checkbox':
-      return (
+      fieldComponent = (
         <Field name={field.name} key={field.name}>
           {({ field: fieldProps, form }: FieldProps<any>) => {
             if (field.options) {
@@ -89,8 +93,9 @@ export const chooseFormTypes = (
           }}
         </Field>
       );
+      break;
     case 'text':
-      return (
+      fieldComponent = (
         <Field
           type={field.type}
           name={field.name}
@@ -98,8 +103,9 @@ export const chooseFormTypes = (
           key={field.name}
         />
       );
+      break;
     case 'number':
-      return (
+      fieldComponent = (
         <Field
           type={field.type}
           name={field.name}
@@ -108,16 +114,38 @@ export const chooseFormTypes = (
           min="0"
         />
       );
+      break;
     case 'date':
-      return <Field type={field.type} name={field.name} key={field.name} />;
-
+      fieldComponent = (
+        <Field key={field.name} name={field.name} placeholder="dd/MM/yyyy">
+          {({ field: fieldProps, form }: FieldProps<any>) => {
+            return (
+              <DatePicker
+                selected={
+                  (fieldProps.value && new Date(fieldProps.value)) || null
+                }
+                onChange={(val) => {
+                  form.setFieldValue(field.name, val);
+                }}
+                placeholderText="Select date"
+              />
+            );
+          }}
+        </Field>
+      );
+      break;
     default:
       break;
   }
+  return fieldComponent;
 };
 
 export const generateField = (
-  { errors, touched }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
+  {
+    errors,
+    touched,
+    setFieldValue
+  }: FormikProps<UpdateFormData> | FormikProps<ApplyFormData>,
   field: FieldType,
   language: languageOptions = 'en',
   questionNumber: number = 0
@@ -174,7 +202,7 @@ export const generateField = (
         <div> </div>
       )}
       <div className="form-field">
-        {chooseFormTypes(field, language)}
+        {ChooseFormTypes(field, language)}
         {field.note ? <div className="form-note">{field.note}</div> : null}
         {errors[field.name as keyof (UpdateFormData | ApplyFormData)] &&
         touched[field.name as keyof (UpdateFormData | ApplyFormData)] ? (

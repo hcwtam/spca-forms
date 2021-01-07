@@ -45,7 +45,6 @@ export default function ServiceTypes({
   return (
     <div
       style={{
-        marginBottom: 30,
         width: '100%'
       }}
     >
@@ -87,7 +86,7 @@ export default function ServiceTypes({
           textAlign: 'left',
           marginLeft: 0,
           textDecoration: 'underline',
-          marginTop: 60,
+          marginTop: 30,
           marginBottom: -10,
           color: '#777777'
         }}
