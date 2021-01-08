@@ -144,6 +144,7 @@ export const ChooseFormTypes = (
               placeholder="MM"
               style={{ width: 120 }}
               type="text"
+              maxLength={2}
             />
             /
             <Field
@@ -152,6 +153,7 @@ export const ChooseFormTypes = (
               placeholder="yyyy"
               style={{ width: 160 }}
               type="text"
+              maxLength={4}
             />
           </div>
           {errors && touched ? (
