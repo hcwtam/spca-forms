@@ -39,8 +39,8 @@ export default function Navbar({
           >
             EN
           </div>
-          <div>|</div>
-          {/* <div
+          {/* <div>|</div>
+          <div
             className={styles.Language}
             style={language === 'hk' ? ACTIVE_STYLE : {}}
             onClick={() => changeLanguage('hk')}
