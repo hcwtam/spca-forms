@@ -28,9 +28,9 @@ export default function Navbar({
         <div className={styles.Form} onClick={() => history.push('/apply')}>
           {language === 'en' ? 'Apply' : '申請'}
         </div>
-        <div className={styles.Form} onClick={() => history.push('/update')}>
+        {/* <div className={styles.Form} onClick={() => history.push('/update')}>
           {language === 'en' ? 'Update' : '更新'}
-        </div>
+        </div> */}
         <div className={styles.Languages}>
           <div
             className={styles.Language}
@@ -40,13 +40,13 @@ export default function Navbar({
             EN
           </div>
           <div>|</div>
-          <div
+          {/* <div
             className={styles.Language}
             style={language === 'hk' ? ACTIVE_STYLE : {}}
             onClick={() => changeLanguage('hk')}
           >
             中
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
