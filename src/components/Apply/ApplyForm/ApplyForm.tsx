@@ -178,11 +178,11 @@ export default function ApplyForm(): ReactElement {
       .oneOf(['Yes'], 'You must have an HKID card to become a volunteer.'),
     title: Yup.string().required(REQUIRED),
     birthMonth: Yup.number()
-      .typeError('Please input valid month (e.g. "3")')
+      .typeError('Please input valid month (e.g. "12")')
       .required(REQUIRED)
-      .integer('Please input valid month (e.g. "3")')
-      .min(1, 'Please input valid month (e.g. "3")')
-      .max(12, 'Please input valid month (e.g. "3")'),
+      .integer('Please input valid month (e.g. "12")')
+      .min(1, 'Please input valid month (e.g. "12")')
+      .max(12, 'Please input valid month (e.g. "12")'),
     birthYear: Yup.number()
       .typeError('Please input valid year (e.g. "2000")')
       .required(REQUIRED)
