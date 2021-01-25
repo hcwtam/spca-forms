@@ -1,4 +1,36 @@
 .Success {
     width: 100%;
-    text-align: center;
+    max-width: 700px;
+    margin: 30px auto 0;
+    text-align: left;
+    background-color: white;
+    padding: 50px 70px 70px;
+    border: 1px solid  #eee;
+}
+
+.Success button {
+        width: 120px;
+        height: 60px;
+        margin: 50px 15px 0;
+        border-radius: 3px;
+        border: 1px solid  #ccc;
+        cursor: pointer;
+        font-weight: 600;
+       
+}
+
+.Success button:hover {
+    background-color: rgb(245, 245, 245);
+   
+}
+
+.Success p {
+    margin: 10px 0;
+    line-height: 2;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

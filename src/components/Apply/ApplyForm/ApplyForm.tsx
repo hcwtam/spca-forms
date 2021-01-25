@@ -26,15 +26,15 @@ import {
 import { generateField } from '../../formFields/formUtils';
 import { languageContext } from '../../../store/LanguageProvider';
 import { FieldType } from '../../formFields/Types';
-import Occupation from './Occupation';
 import HasIllness from './HasIllness';
 import ServiceTypes from './ServiceTypes';
 import HasPets from './HasPets';
+import IsMember from './IsMember';
 
 export type ApplyFormData = {
-  isMember: string;
   firstName: string;
   lastName: string;
+  hkid: string;
   title: string;
   birthMonth: string;
   birthYear: string;
@@ -43,6 +43,8 @@ export type ApplyFormData = {
   emergencyContact: string;
   relationship: string;
   emergencyNumber: string;
+  isMember: string;
+  membNo: string;
   region?: string;
   language?: string;
   experience?: number;
@@ -54,7 +56,7 @@ export type ApplyFormData = {
   serviceTypesNAR?: string[];
   hasIllness: string;
   illnesses: string;
-  occupation: string;
+  occupation?: string;
   industry?: string;
   industryOthers?: string;
   occupationOthers?: string;
@@ -133,9 +135,9 @@ export default function ApplyForm(): ReactElement {
   }
 
   const initialValues = {
-    isMember: '',
     firstName: '',
     lastName: '',
+    hkid: '',
     title: '',
     birthMonth: '',
     birthYear: '',
@@ -145,6 +147,8 @@ export default function ApplyForm(): ReactElement {
     emergencyContact: '',
     relationship: '',
     emergencyNumber: '',
+    isMember: '',
+    membNo: '',
     language: '',
     experience: 0,
     hasPets: '',
@@ -155,7 +159,6 @@ export default function ApplyForm(): ReactElement {
     serviceTypesNAR: [],
     hasIllness: '',
     illnesses: '',
-    occupation: '',
     industry: '',
     industryOthers: '',
     occupationOthers: '',
@@ -170,6 +173,9 @@ export default function ApplyForm(): ReactElement {
   const validationSchema = Yup.object({
     firstName: Yup.string().required(REQUIRED),
     lastName: Yup.string().required(REQUIRED),
+    hkid: Yup.string()
+      .required(REQUIRED)
+      .oneOf(['Yes'], 'You must have an HKID card to become a volunteer.'),
     title: Yup.string().required(REQUIRED),
     birthMonth: Yup.number()
       .typeError('Incorrect value')
@@ -193,7 +199,6 @@ export default function ApplyForm(): ReactElement {
       ),
     email: Yup.string().email().required(REQUIRED),
     region: Yup.string().required(REQUIRED),
-    isMember: Yup.string().required(REQUIRED),
     emergencyContact: Yup.string().required(REQUIRED),
     relationship: Yup.string().required(),
     emergencyNumber: Yup.number()
@@ -204,7 +209,8 @@ export default function ApplyForm(): ReactElement {
         'Must be exactly 8 digits',
         (val) => val?.toString().length === 8
       ),
-
+    isMember: Yup.string().required(REQUIRED),
+    membNo: Yup.string(),
     language: Yup.string().required(REQUIRED),
     experience: Yup.number().required(REQUIRED),
     days: Yup.array().required(REQUIRED),
@@ -213,8 +219,6 @@ export default function ApplyForm(): ReactElement {
     hasPets: Yup.string().required(REQUIRED),
     petTypes: Yup.array(),
     petTypesOthers: Yup.string(),
-    occupation: Yup.string().required(REQUIRED),
-    occupationOthers: Yup.string(),
     industry: Yup.string(),
     industryOthers: Yup.string(),
     hasIllness: Yup.string().required(REQUIRED),
@@ -222,9 +226,7 @@ export default function ApplyForm(): ReactElement {
     infoCollect1: Yup.string()
       .required(REQUIRED)
       .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
-    infoCollect2: Yup.string()
-      .required(REQUIRED)
-      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+    infoCollect2: Yup.string().required(REQUIRED),
     compensation: Yup.string()
       .required(REQUIRED)
       .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
@@ -290,21 +292,21 @@ export default function ApplyForm(): ReactElement {
           onSubmit={onSubmit}
         >
           {(formik: FormikProps<ApplyFormData>) => {
-            console.log(formik);
+            console.log(formik.isValid);
 
             return (
               <Form>
                 {PARTICULARS.map((field: FieldType, index) =>
                   generateField(formik, field, language, 1 + index)
                 )}
+                <IsMember formik={formik} questionNumber={12} />
                 <div className={styles.Box} />
                 <h1>{APPLY_FORM_CONTENT.volunteerInfoTitle}</h1>
                 {APPLY_INFO.map((field: FieldType, index) =>
-                  generateField(formik, field, language, 12 + index)
+                  generateField(formik, field, language, 13 + index)
                 )}
-                <ServiceTypes formik={formik} questionNumber={15} />
-                <HasPets formik={formik} questionNumber={16} />
-                <Occupation formik={formik} questionNumber={17} />
+                <ServiceTypes formik={formik} questionNumber={16} />
+                <HasPets formik={formik} questionNumber={17} />
                 <HasIllness formik={formik} questionNumber={18} />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>

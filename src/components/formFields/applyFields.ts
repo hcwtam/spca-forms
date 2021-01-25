@@ -16,6 +16,13 @@ export const PARTICULARS_EN: FieldType[] = [
     required: true
   },
   {
+    title: 'Are you a holder of Hong Kong Identity Card?',
+    name: 'hkid',
+    type: 'radio',
+    options: ['Yes', 'No'],
+    required: true
+  },
+  {
     title: 'Title',
     name: 'title',
     type: 'radio',
@@ -49,13 +56,7 @@ export const PARTICULARS_EN: FieldType[] = [
     options: ['HK Island', 'Kowloon', 'New Territories'],
     required: true
   },
-  {
-    title: 'Are you our member?',
-    name: 'isMember',
-    type: 'radio',
-    options: ['Yes', 'No'],
-    required: true
-  },
+
   {
     title: 'Emergency Contact Name',
     name: 'emergencyContact',

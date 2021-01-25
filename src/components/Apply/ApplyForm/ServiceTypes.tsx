@@ -14,7 +14,6 @@ const AR = {
   options: [
     'Kennel Keeper [i]',
     'Foster Parent [ii]',
-    'Dog Walker',
     'Cat Colony Care Programme (CCCP) Carer',
     'Community Dog Programme (CDP) Carer'
   ],
@@ -33,7 +32,7 @@ const NAR = {
     'Editing/Translation Work'
   ],
   required: false,
-  footnote1: '[i] Kennel Keeper: 9am – 12noon kennel cleaning',
+  footnote1: '[i] 9am – 1pm kennel cleaning at Wanchai Headquarters',
   footnote2:
     '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
 };

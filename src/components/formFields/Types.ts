@@ -6,7 +6,7 @@ export type FieldType = {
   statement4?: string;
   title?: string;
   name: string;
-  type?: string;
+  type?: 'radio' | 'checkbox' | 'text' | 'number' | 'date' | string;
   placeholder?: string;
   options?: string[];
   required: boolean;
