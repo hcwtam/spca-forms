@@ -178,17 +178,17 @@ export default function ApplyForm(): ReactElement {
       .oneOf(['Yes'], 'You must have an HKID card to become a volunteer.'),
     title: Yup.string().required(REQUIRED),
     birthMonth: Yup.number()
-      .typeError('Incorrect value')
+      .typeError('Please input valid month (e.g. "3")')
       .required(REQUIRED)
-      .integer('Incorrect value')
-      .min(1, 'Incorrect value')
-      .max(12, 'Incorrect value'),
+      .integer('Please input valid month (e.g. "3")')
+      .min(1, 'Please input valid month (e.g. "3")')
+      .max(12, 'Please input valid month (e.g. "3")'),
     birthYear: Yup.number()
-      .typeError('Incorrect value')
+      .typeError('Please input valid year (e.g. "2000")')
       .required(REQUIRED)
-      .integer('Incorrect value')
-      .min(1900, 'Incorrect value')
-      .max(2020, 'Incorrect value'),
+      .integer('Please input valid year (e.g. "2000")')
+      .min(1900, 'Please input valid year (e.g. "2000")')
+      .max(2020, 'Please input valid year (e.g. "2000")'),
     contactNumber: Yup.number()
       .typeError('it must be number')
       .required(REQUIRED)

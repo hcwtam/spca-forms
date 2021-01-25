@@ -13,9 +13,9 @@ const AR = {
   type: 'checkbox',
   options: [
     'Kennel Keeper [i]',
-    'Foster Parent [ii]',
-    'Cat Colony Care Programme (CCCP) Carer',
-    'Community Dog Programme (CDP) Carer'
+    'Foster Parent [ii]'
+    // 'Cat Colony Care Programme (CCCP) Carer',
+    // 'Community Dog Programme (CDP) Carer'
   ],
   required: false
 };
