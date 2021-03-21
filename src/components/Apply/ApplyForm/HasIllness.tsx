@@ -39,7 +39,7 @@ export default function HasIllness({
               </span>
             ) : null}
             {field.title}
-            {field.required ? <span> *</span> : null}
+            {/* {field.required ? <span> *</span> : null} */}
           </label>
         ) : (
           <div> </div>

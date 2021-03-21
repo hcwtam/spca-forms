@@ -45,7 +45,7 @@ export const ChooseFormTypes = (
               const lastOption = field.options[field.options.length - 1];
               return (
                 <>
-                  <div className="checkbox-buttons">
+                  {field.options.length > 2 ?<div className="checkbox-buttons">
                     <div
                       className="checkbox-button"
                       onClick={() =>
@@ -61,7 +61,7 @@ export const ChooseFormTypes = (
                     >
                       {language === 'en' ? 'Clear' : '清除'}
                     </div>
-                  </div>
+                  </div>: null}
                   <div className={field.type}>
                     {field.options?.map((option) => {
                       return (
@@ -208,25 +208,25 @@ export const generateField = (
       {field.statement ? (
         <div className="statement">
           {field.statement}
-          {!field.statement2 && field.required ? <span> *</span> : null}
+          {/* {!field.statement2 && field.required ? <span> *</span> : null} */}
         </div>
       ) : null}
       {field.statement2 ? (
         <div className="statement">
           {field.statement2}
-          {!field.statement3 && field.required ? <span> *</span> : null}
+          {/* {!field.statement3 && field.required ? <span> *</span> : null} */}
         </div>
       ) : null}
       {field.statement3 ? (
         <div className="statement">
           {field.statement3}
-          {!field.statement4 && field.required ? <span> *</span> : null}
+          {/* {!field.statement4 && field.required ? <span> *</span> : null} */}
         </div>
       ) : null}
       {field.statement4 ? (
         <div className="statement">
           {field.statement4}
-          {field.required ? <span> *</span> : null}
+          {/* {field.required ? <span> *</span> : null} */}
         </div>
       ) : null}
     </div>
@@ -248,7 +248,7 @@ export const generateField = (
             </span>
           ) : null}
           {field.title}
-          {field.title && field.required ? <span> *</span> : null}
+          {/* {field.title && field.required ? <span> *</span> : null} */}
         </label>
       ) : (
         <div> </div>

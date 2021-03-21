@@ -12,8 +12,8 @@ const AR = {
   name: 'serviceTypesAR',
   type: 'checkbox',
   options: [
-    'Kennel Keeper [i]',
-    'Foster Parent [ii]'
+    'Kennel Keeper (9am – 1pm kennel cleaning at Wanchai Headquarters)',
+    'Foster Parent (Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months)'
     // 'Cat Colony Care Programme (CCCP) Carer',
     // 'Community Dog Programme (CDP) Carer'
   ],
@@ -24,17 +24,14 @@ const NAR = {
   name: 'serviceTypesNAR',
   type: 'checkbox',
   options: [
-    'Event Helping',
-    'Charity Sales',
-    'Administrative Work',
+    'Event Helping/ Charity Sales (Indoors)',
+    'Event Helping/ Charity Sales (Outdoors)',
+    'Administrative Support',
     'Graphic Design',
     'IT-related Support',
-    'Editing/Translation Work'
+    'Writing/Translation Support'
   ],
-  required: false,
-  footnote1: '[i] 9am – 1pm kennel cleaning at Wanchai Headquarters',
-  footnote2:
-    '[ii] Foster Parent: Provide a temporary home for animals. Pets will be staying at your family from few weeks to few months'
+  required: false
 };
 
 export default function ServiceTypes({
@@ -63,7 +60,6 @@ export default function ServiceTypes({
               </span>
             ) : null}
             What kind of volunteer activities are you interested in?{' '}
-            <span> *</span>
           </label>
         </div>
       </div>

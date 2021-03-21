@@ -2,6 +2,13 @@ import { FieldType } from './Types';
 
 export const PARTICULARS_EN: FieldType[] = [
   {
+    title: 'Title',
+    name: 'title',
+    type: 'radio',
+    options: ['Mr.', 'Ms.', 'Mrs.', 'Dr.'],
+    required: true
+  },
+  {
     title: 'First Name',
     name: 'firstName',
     type: 'text',
@@ -23,20 +30,13 @@ export const PARTICULARS_EN: FieldType[] = [
     required: true
   },
   {
-    title: 'Title',
-    name: 'title',
-    type: 'radio',
-    options: ['Mr.', 'Ms.', 'Mrs.', 'Dr.'],
-    required: true
-  },
-  {
-    title: 'Date of Birth',
+    title: 'Date of Birth (All volunteers must be at least 16 years old)',
     name: 'dateOfBirth',
     type: 'date',
     required: true
   },
   {
-    title: 'Contact Number',
+    title: 'Mobile',
     name: 'contactNumber',
     type: 'text',
     placeholder: 'Local 8 digits contact no.',
@@ -177,7 +177,7 @@ export const APPLY_INFO_EN: FieldType[] = [
   {
     title: 'Language Preference',
     name: 'language',
-    type: 'radio',
+    type: 'checkbox',
     options: ['Chinese', 'English'],
     required: true
   },

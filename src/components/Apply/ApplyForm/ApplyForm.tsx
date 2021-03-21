@@ -46,7 +46,7 @@ export type ApplyFormData = {
   isMember: string;
   membNo: string;
   region?: string;
-  language?: string;
+  language: string[];
   experience?: number;
   hasPets: string;
   petTypes: string[];
@@ -81,19 +81,17 @@ const REWARD_CONFIG = {
 };
 
 const APPLY_FORM_CONTENT_EN = {
-  particulars: 'Personal Particulars',
-  volunteerInfoTitle: 'Volunteering Information',
-  InfoCollectionTitle: 'Personal Information Collection Statement',
-  compensationTitle: 'Waiver of Compensation Benefit',
-  tetanusTitle: 'Tetanus Waiver',
-  rabiesTitle: 'Rabies Waiver',
-  declarationTitle: 'Personal Declaration',
+  particulars: 'A)  Personal Particulars and Volunteering Information',
+  InfoCollectionTitle: 'B)  Personal Information Collection Statement',
+  compensationTitle: 'C)  Waiver of Compensation Benefit',
+  tetanusTitle: 'D) Tetanus Waiver',
+  rabiesTitle: 'E)  Rabies Waiver',
+  declarationTitle: 'Final Section: Personal Declaration',
   submit: 'Submit'
 };
 
 const APPLY_FORM_CONTENT_HK = {
   particulars: '個人資料',
-  volunteerInfoTitle: '義工資料',
   InfoCollectionTitle: '收集個人資料聲明',
   compensationTitle: '免責聲明',
   tetanusTitle: '破傷風免責聲明',
@@ -149,7 +147,7 @@ export default function ApplyForm(): ReactElement {
     emergencyNumber: '',
     isMember: '',
     membNo: '',
-    language: '',
+    language: [],
     experience: 0,
     hasPets: '',
     petTypes: [],
@@ -211,7 +209,7 @@ export default function ApplyForm(): ReactElement {
       ),
     isMember: Yup.string().required(REQUIRED),
     membNo: Yup.string(),
-    language: Yup.string().required(REQUIRED),
+    language: Yup.array().required(REQUIRED),
     experience: Yup.number().required(REQUIRED),
     days: Yup.array().required(REQUIRED),
     serviceTypesAR: Yup.array(),
@@ -283,7 +281,7 @@ export default function ApplyForm(): ReactElement {
             paddingBottom: 20
           }}
         >
-          Complete the form below to get started (all questions required)
+          Complete the form below to get started
         </h2>
         <h1>{APPLY_FORM_CONTENT.particulars}</h1>
         <Formik
@@ -299,14 +297,12 @@ export default function ApplyForm(): ReactElement {
                 {PARTICULARS.map((field: FieldType, index) =>
                   generateField(formik, field, language, 1 + index)
                 )}
-                <IsMember formik={formik} questionNumber={12} />
-                <div className={styles.Box} />
-                <h1>{APPLY_FORM_CONTENT.volunteerInfoTitle}</h1>
+                <HasPets formik={formik} questionNumber={12} />
+                <IsMember formik={formik} questionNumber={13} />
                 {APPLY_INFO.map((field: FieldType, index) =>
-                  generateField(formik, field, language, 13 + index)
+                  generateField(formik, field, language, 14 + index)
                 )}
-                <ServiceTypes formik={formik} questionNumber={16} />
-                <HasPets formik={formik} questionNumber={17} />
+                <ServiceTypes formik={formik} questionNumber={17} />
                 <HasIllness formik={formik} questionNumber={18} />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>
