@@ -405,7 +405,7 @@ export const RABIES_HK: FieldType[] = [
 export const DECLARATION_EN = [
   {
     statement:
-      'I the undersigned, declares to be over sixteen years of age and holders of a Hong Kong Identity Card, and that the information provided on this application is true and correct. The undersigned agrees to bear legal liability for any false and incorrect information.',
+      'I the undersigned, declare to be over sixteen years of age and holder of a Hong Kong Identity Card, and that the information provided on this application is true and correct. The undersigned agrees to bear legal liability for any false and incorrect information.',
 
     name: 'declaration',
     type: 'radio',
