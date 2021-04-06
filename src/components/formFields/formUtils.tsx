@@ -45,23 +45,25 @@ export const ChooseFormTypes = (
               const lastOption = field.options[field.options.length - 1];
               return (
                 <>
-                  {field.options.length > 2 ?<div className="checkbox-buttons">
-                    <div
-                      className="checkbox-button"
-                      onClick={() =>
-                        form.setFieldValue(field.name, field.options)
-                      }
-                    >
-                      {language === 'en' ? 'All' : '全選'}
+                  {field.options.length > 2 ? (
+                    <div className="checkbox-buttons">
+                      <div
+                        className="checkbox-button"
+                        onClick={() =>
+                          form.setFieldValue(field.name, field.options)
+                        }
+                      >
+                        {language === 'en' ? 'All' : '全選'}
+                      </div>
+                      <div>{' | '}</div>
+                      <div
+                        className="checkbox-button"
+                        onClick={() => form.setFieldValue(field.name, [])}
+                      >
+                        {language === 'en' ? 'Clear' : '清除'}
+                      </div>
                     </div>
-                    <div>{' | '}</div>
-                    <div
-                      className="checkbox-button"
-                      onClick={() => form.setFieldValue(field.name, [])}
-                    >
-                      {language === 'en' ? 'Clear' : '清除'}
-                    </div>
-                  </div>: null}
+                  ) : null}
                   <div className={field.type}>
                     {field.options?.map((option) => {
                       return (
@@ -92,7 +94,9 @@ export const ChooseFormTypes = (
                             <Field
                               type="text"
                               name={field.name + 'Others'}
-                              placeholder="Please specify"
+                              placeholder={
+                                language === 'en' ? 'Please specify' : '請列明'
+                              }
                             />
                           ) : null}
                         </label>
@@ -141,7 +145,7 @@ export const ChooseFormTypes = (
             <Field
               key="birthMonth"
               name="birthMonth"
-              placeholder="MM"
+              placeholder={language === 'en' ? 'MM' : '月'}
               style={{ width: 120 }}
               type="text"
               maxLength={2}
@@ -150,7 +154,7 @@ export const ChooseFormTypes = (
             <Field
               key="birthYear"
               name="birthYear"
-              placeholder="yyyy"
+              placeholder={language === 'en' ? 'yyyy' : '年'}
               style={{ width: 160 }}
               type="text"
               maxLength={4}

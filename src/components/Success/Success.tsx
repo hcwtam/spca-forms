@@ -1,14 +1,13 @@
 import React, { ReactElement } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import styles from './Success.module.css';
 
 export default function Success(): ReactElement {
-  const history = useHistory();
+  // const history = useHistory();
 
   return (
     <div className={styles.Success}>
-      <h1>多謝您的申請</h1>
+      {/* <h1>多謝您的申請</h1>
       <h1>Thank you for your application</h1>
       <br />
       <br />
@@ -27,7 +26,27 @@ export default function Success(): ReactElement {
           Return to Homepage
         </button>
         <button onClick={() => history.push('/apply')}>返回主頁</button>
-      </div>
+      </div> */}
+      <p>Thank you for submitting your SPCA Volunteer Application.</p>
+      <p>
+        Please{' '}
+        <a href="https://hkspca.createsend.com/campaigns/reports/viewCampaign.aspx?d=i&c=2BD829314DDEC7D0&ID=B78735FB6CFF27EA2540EF23F30FEDED&temp=False&tx=0">
+          click here
+        </a>{' '}
+        to complete the Online Volunteer Orientation which is required for all
+        volunteers.
+      </p>
+      <p>Thank you!</p>
+      <br />
+      <p>多謝申請成為愛護動物協會義工。</p>
+      <p>
+        請
+        <a href="https://hkspca.createsend.com/campaigns/reports/viewCampaign.aspx?d=i&c=2BD829314DDEC7D0&ID=B78735FB6CFF27EA2540EF23F30FEDED&temp=False&tx=0">
+          按此
+        </a>
+        完成網上義工迎新會，並必須完成迎新問卷，才能成為合資格義工。
+      </p>
+      <p>謝謝!</p>
     </div>
   );
 }

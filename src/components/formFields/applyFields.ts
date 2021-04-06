@@ -58,14 +58,14 @@ export const PARTICULARS_EN: FieldType[] = [
   },
 
   {
-    title: 'Emergency Contact Name',
+    title: 'Emergency Contact Person',
     name: 'emergencyContact',
     type: 'text',
     placeholder: 'Name of Emergency Contact Person',
     required: true
   },
   {
-    title: 'Relationship',
+    title: 'Relationship with Emergency Contact Person',
     name: 'relationship',
     type: 'text',
     placeholder: 'Relationship with Emergency Contact Person',
@@ -81,59 +81,44 @@ export const PARTICULARS_EN: FieldType[] = [
 ];
 export const PARTICULARS_HK: FieldType[] = [
   {
-    title: '閣下是否會員?',
-    name: 'isMember',
+    title: '稱謂',
+    name: 'title',
     type: 'radio',
-    options: ['是', '否'],
-    required: true
-  },
-  {
-    title: '會員編號',
-    name: 'membershipNo',
-    type: 'text',
-    placeholder: 'SPCA會員編號',
-    required: false,
-    note: '如果您並非會員，請將此欄保留空白。'
-  },
-  {
-    title: '姓氏',
-    name: 'firstName',
-    type: 'text',
-    placeholder: '姓氏',
+    options: ['先生', '小姐', '女士', '博士/ 醫生'],
     required: true
   },
   {
     title: '名字',
-    name: 'lastName',
+    name: 'firstName',
     type: 'text',
     placeholder: '名字',
     required: true
   },
   {
-    title: '稱謂',
-    name: 'title',
-    type: 'radio',
-    options: ['先生', '小姐', '太太', '博士'],
-    required: true
-  },
-  {
-    title: '香港身份證號碼',
-    name: 'hkidNumber',
+    title: '姓氏',
+    name: 'lastName',
     type: 'text',
-    placeholder: '香港身份證號碼',
+    placeholder: '姓氏',
     required: true
   },
   {
-    title: '出生日期',
+    title: '你是否擁有香港身份證？',
+    name: 'hkid',
+    type: 'radio',
+    options: ['是', '否'],
+    required: true
+  },
+  {
+    title: '出生日期 (所有義工必須年滿16歳)',
     name: 'dateOfBirth',
     type: 'date',
     required: true
   },
   {
-    title: '聯絡電話',
+    title: '手提電話',
     name: 'contactNumber',
     type: 'text',
-    placeholder: '本地8位數字聯絡電話',
+    placeholder: '香港 8位數字電話號碼',
     required: true
   },
   {
@@ -144,24 +129,25 @@ export const PARTICULARS_HK: FieldType[] = [
     required: true
   },
   {
-    title: '區域',
+    title: '居住地區',
     name: 'region',
     type: 'radio',
-    options: ['香港島', '九龍', '新界'],
+    options: ['港島', '九龍', '新界'],
     required: true
   },
+
   {
-    title: '緊急聯絡人姓名',
+    title: '緊急聯絡人',
     name: 'emergencyContact',
     type: 'text',
     placeholder: '緊急聯絡人姓名',
     required: true
   },
   {
-    title: '關係',
+    title: '與緊急聯絡人之關係',
     name: 'relationship',
     type: 'text',
-    placeholder: '與緊急聯絡人的關係',
+    placeholder: '與緊急聯絡人之關係',
     required: true
   },
   {
@@ -200,82 +186,26 @@ export const APPLY_INFO_EN: FieldType[] = [
 
 export const APPLY_INFO_HK: FieldType[] = [
   {
-    title: '首選語言',
+    title: '語言',
     name: 'language',
-    type: 'radio',
+    type: 'checkbox',
     options: ['中文', '英文'],
     required: true
   },
   {
-    title: '義工年資',
+    title: '義工資歷',
     name: 'experience',
     type: 'number',
-    required: true
-  },
-  {
-    title: '是否有飼養動物?',
-    name: 'hasPets',
-    type: 'radio',
-    options: ['是', '否'],
-    required: true
+    required: true,
+    note: '請填寫義工年資'
   },
 
   {
-    title: '寵物種類',
-    name: 'petTypes',
-    type: 'checkbox',
-    options: ['狗', '貓', '其他'],
-    required: false,
-    note: '如有飼養動物，請選擇寵物種類。如沒有，請將此欄保留空白。'
-  },
-  {
-    title: '服務時間',
+    title: '您能參與義工服務的時間',
     name: 'days',
     type: 'checkbox',
-    options: [
-      '星期一',
-      '星期二',
-      '星期三',
-      '星期四',
-      '星期五',
-      '星期六',
-      '星期日'
-    ],
+    options: ['平日', '周末'],
     required: true
-  },
-  {
-    title: '服務性質',
-    name: 'serviceTypes',
-    type: 'checkbox',
-    options: [
-      '大型活動',
-      '文職工作',
-      '動物管理員',
-      '暫養家長',
-      '繪圖設計',
-      'IT技術支援',
-      '暑期實習（七月至八月）[i]',
-      '全年實習 [ii]'
-    ],
-    required: true,
-    footnote1: '[i] 動物管理員 - 9am – 12noon 清潔狗房籠舍',
-    footnote2:
-      '[ii] 暫養家長 - 為動物提供一個臨時的家，寵物將會暫住於閣下的家,由數星期到數月不等'
-  },
-  {
-    question:
-      '請問您是否有一些心理障礙或身體殘疾以致未能參與某些工作（例如：心臟毛病、脊骨損傷、癲癇症、敏感等等）？',
-    title: '答案',
-    name: 'hasIllness',
-    type: 'radio',
-    options: ['是', '否'],
-    required: true
-  },
-  {
-    title: '如有, 請詳細列明',
-    name: 'illnesses',
-    type: 'text',
-    required: false
   }
 ];
 
@@ -302,7 +232,7 @@ export const INFO_COLLECTION_HK: FieldType[] = [
   {
     statement:
       '個人資料(私隱)條例現已生效，閣下提供的資料只供申請成為香港愛護動物協會義工日後聯絡及通訊之用，除獲本協會授權的人員外，將不會提供予其他人士。愛護動物協會希望閣下能支持我們的工作，讓我們繼續使用有關資料。',
-    title: '答案',
+
     name: 'infoCollect1',
     type: 'radio',
     options: ['同意', '不同意'],
@@ -311,7 +241,7 @@ export const INFO_COLLECTION_HK: FieldType[] = [
   {
     statement:
       '閣下希望收到有關本協會的動物福利工作、募捐、推廣及其他活動的信息及同意本協會使用你所提供的個人資料，向你發放有關的資訊。除獲本協會授權的人員外，你的個人資料將不會提供予其他人士使用。愛護動物協會希望閣下能支持我們的工作，讓我們繼續使用有關資料。',
-    title: '答案',
+
     name: 'infoCollect2',
     type: 'radio',
     options: ['同意', '不同意'],
@@ -347,7 +277,7 @@ export const COMPENSATION_HK: FieldType[] = [
       '作為義工，假若本人與協會員工在溝通上產生問題，我會盡快告之活動負責人。假若本人因事未能履行獲分配的工作，本人同意於事前盡早通知義工聯絡人。本人願意接受活動負責人的督導，並於有意見、建設性的評語、建議及批評時，直接向活動負責人提出。',
     statement4:
       '本人明白協會內所有關於新舊動物主人，會員及其他義工的紀錄必須保持機密。本人授權協會可使用任何和所有拍攝到本人的相片於推廣協會服務、計劃或活動上。本人明白所有有關照片及底片將會成為協會的資產，可能在未有事前通知或收取任何報酬下被使用。本人已經詳細閱讀，清楚明白和同意以上條款。',
-    title: '答案',
+
     name: 'compensation',
     type: 'radio',
     options: ['同意', '不同意'],
@@ -371,7 +301,7 @@ export const TETANUS_HK: FieldType[] = [
   {
     statement:
       '協會認為會接觸或處理動物的義工，注射有有效之破傷風疫苗是非常重要。倘若義工對破傷風 疫苗注射有所疑問，我們極力鼓勵他/她自費請教醫生以決定是否注射破傷風疫苗。',
-    title: '答案',
+
     name: 'tetanus',
     type: 'radio',
     options: ['同意', '不同意'],
@@ -394,7 +324,7 @@ export const RABIES_HK: FieldType[] = [
   {
     statement:
       '協會為處理動物的義工準備了一系列預防狂犬病疫苗注射。協會義工可自費請教他/她的醫生以決定是否接受狂犬病疫苗注射。本人已經詳細閱讀，清楚明白和同意以上內容。本人確認協會不用承擔因本人未有注射破傷風疫苗及狂犬病疫苗而引致的各種責任。本人亦明白無論本人對注射破傷風及狂犬病疫苗之決定為何，本人均完全承擔所有之風險。',
-    title: '答案',
+
     name: 'rabies',
     type: 'radio',
     options: ['同意', '不同意'],
@@ -417,7 +347,7 @@ export const DECLARATION_HK = [
   {
     statement:
       '本人謹此聲明：本人年滿十六歲並擁有香港居民身份證，在申請書上填寫的所有資料均真確無訛。如有提供不實資料，當自負法律責任。',
-    title: '答案',
+
     name: 'declaration',
     type: 'radio',
     options: ['同意', '不同意'],

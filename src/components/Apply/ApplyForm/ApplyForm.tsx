@@ -68,6 +68,7 @@ export type ApplyFormData = {
   declaration: string;
 };
 
+// confetti configurations
 const REWARD_CONFIG = {
   lifetime: 200,
   angle: 90,
@@ -80,6 +81,14 @@ const REWARD_CONFIG = {
   springAnimation: true
 };
 
+// Content
+const INTRO_EN =
+  'Thank you for your interest in donating your time and volunteering for the SPCA!';
+const INTRO_HK = '感謝您願意施贈寶貴時間加入愛護動物協會義工團隊!';
+
+const PROMPT_EN = 'Complete the form below to get started';
+const PROMPT_HK = '請填寫以下申請表格';
+
 const APPLY_FORM_CONTENT_EN = {
   particulars: 'A)  Personal Particulars and Volunteering Information',
   InfoCollectionTitle: 'B)  Personal Information Collection Statement',
@@ -91,12 +100,12 @@ const APPLY_FORM_CONTENT_EN = {
 };
 
 const APPLY_FORM_CONTENT_HK = {
-  particulars: '個人資料',
-  InfoCollectionTitle: '收集個人資料聲明',
-  compensationTitle: '免責聲明',
-  tetanusTitle: '破傷風免責聲明',
-  rabiesTitle: '狂犬病免責聲明',
-  declarationTitle: '個人聲明',
+  particulars: 'A)  個人資料',
+  InfoCollectionTitle: 'B)  收集個人資料聲明',
+  compensationTitle: 'C)  免責聲明',
+  tetanusTitle: 'D) 破傷風免責聲明',
+  rabiesTitle: 'E)  狂犬病免責聲明',
+  declarationTitle: '最后一節: 個人聲明',
   submit: '提交'
 };
 
@@ -173,38 +182,91 @@ export default function ApplyForm(): ReactElement {
     lastName: Yup.string().required(REQUIRED),
     hkid: Yup.string()
       .required(REQUIRED)
-      .oneOf(['Yes'], 'You must have an HKID card to become a volunteer.'),
+      .oneOf(
+        ['Yes', '是'],
+        language === 'en'
+          ? 'You must have an HKID card to become a volunteer.'
+          : '所有義工必須持有香港身份證'
+      ),
     title: Yup.string().required(REQUIRED),
     birthMonth: Yup.number()
-      .typeError('Please input valid month (e.g. "12")')
+      .typeError(
+        language === 'en'
+          ? 'Please input valid month (e.g. "12")'
+          : '請填寫正確月份(如："12")'
+      )
       .required(REQUIRED)
-      .integer('Please input valid month (e.g. "12")')
-      .min(1, 'Please input valid month (e.g. "12")')
-      .max(12, 'Please input valid month (e.g. "12")'),
+      .integer(
+        language === 'en'
+          ? 'Please input valid month (e.g. "12")'
+          : '請填寫正確月份(如："12")'
+      )
+      .min(
+        1,
+        language === 'en'
+          ? 'Please input valid month (e.g. "12")'
+          : '請填寫正確月份(如："12")'
+      )
+      .max(
+        12,
+        language === 'en'
+          ? 'Please input valid month (e.g. "12")'
+          : '請填寫正確月份(如："12")'
+      ),
     birthYear: Yup.number()
-      .typeError('Please input valid year (e.g. "2000")')
+      .typeError(
+        language === 'en'
+          ? 'Please input valid year (e.g. "2000")'
+          : '請填寫正確年份(如："2000")'
+      )
       .required(REQUIRED)
-      .integer('Please input valid year (e.g. "2000")')
-      .min(1900, 'Please input valid year (e.g. "2000")')
-      .max(2020, 'Please input valid year (e.g. "2000")'),
+      .integer(
+        language === 'en'
+          ? 'Please input valid year (e.g. "2000")'
+          : '請填寫正確年份(如："2000")'
+      )
+      .min(
+        1900,
+        language === 'en'
+          ? 'Please input valid year (e.g. "2000")'
+          : '請填寫正確年份(如："2000")'
+      )
+      .max(
+        2020,
+        language === 'en'
+          ? 'Please input valid year (e.g. "2000")'
+          : '請填寫正確年份(如："2000")'
+      ),
     contactNumber: Yup.number()
-      .typeError('it must be number')
+      .typeError(
+        language === 'en' ? 'it must be number' : '電話號碼必須為八位數字'
+      )
       .required(REQUIRED)
       .test(
         'len',
-        'Must be exactly 8 digits',
+        language === 'en'
+          ? 'Must be exactly 8 digits'
+          : '電話號碼必須為八位數字',
         (val) => val?.toString().length === 8
       ),
-    email: Yup.string().email().required(REQUIRED),
+    email: Yup.string()
+      .email(
+        language === 'en' ? 'Email format incorrect' : '請提供正確電郵地址'
+      )
+      .required(REQUIRED),
     region: Yup.string().required(REQUIRED),
     emergencyContact: Yup.string().required(REQUIRED),
-    relationship: Yup.string().required(),
+    relationship: Yup.string().required(REQUIRED),
     emergencyNumber: Yup.number()
-      .typeError('it must be number')
+      .typeError(
+        language === 'en' ? 'It must be number' : '電話號碼必須為八位數字'
+      )
       .required(REQUIRED)
       .test(
         'len',
-        'Must be exactly 8 digits',
+        language === 'en'
+          ? 'Must be exactly 8 digits'
+          : '電話號碼必須為八位數字',
         (val) => val?.toString().length === 8
       ),
     isMember: Yup.string().required(REQUIRED),
@@ -223,18 +285,30 @@ export default function ApplyForm(): ReactElement {
     illnesses: Yup.string(),
     infoCollect1: Yup.string()
       .required(REQUIRED)
-      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+      .oneOf(
+        ['Agree', '同意'],
+        language === 'en'
+          ? 'You must agree with the statement above to continue.'
+          : '(請按 ［同意］ 以繼續)'
+      ),
     infoCollect2: Yup.string().required(REQUIRED),
     compensation: Yup.string()
       .required(REQUIRED)
-      .oneOf(['Agree'], 'You must agree with the statement above to continue.'),
+      .oneOf(
+        ['Agree', '同意'],
+        language === 'en'
+          ? 'You must agree with the statement above to continue.'
+          : '(請按 ［同意］ 以繼續)'
+      ),
     tetanus: Yup.string().when('serviceTypesAR', {
       is: (value) => value.length,
       then: Yup.string()
         .required(REQUIRED)
         .oneOf(
-          ['Agree'],
-          'You must agree with the statement above to continue.'
+          ['Agree', '同意'],
+          language === 'en'
+            ? 'You must agree with the statement above to continue.'
+            : '(請按 ［同意］ 以繼續)'
         ),
       otherwise: Yup.string()
     }),
@@ -243,15 +317,22 @@ export default function ApplyForm(): ReactElement {
       then: Yup.string()
         .required(REQUIRED)
         .oneOf(
-          ['Agree'],
-          'You must agree with the statement above to continue.'
+          ['Agree', '同意'],
+          language === 'en'
+            ? 'You must agree with the statement above to continue.'
+            : '(請按 ［同意］ 以繼續)'
         ),
       otherwise: Yup.string()
     }),
 
     declaration: Yup.string()
       .required(REQUIRED)
-      .oneOf(['Agree'], 'You must agree with the statement above to continue.')
+      .oneOf(
+        ['Agree', '同意'],
+        language === 'en'
+          ? 'You must agree with the statement above to continue.'
+          : '(請按 ［同意］ 以繼續)'
+      )
   });
 
   const onSubmit = async (values: ApplyFormData) => {
@@ -268,8 +349,7 @@ export default function ApplyForm(): ReactElement {
           config={REWARD_CONFIG}
         >
           <div className={styles.intro}>
-            Thank you for your interest in donating your time and volunteering
-            for the SPCA!
+            {language === 'en' ? INTRO_EN : INTRO_HK}
           </div>
         </Reward>
         <h2
@@ -281,7 +361,7 @@ export default function ApplyForm(): ReactElement {
             paddingBottom: 20
           }}
         >
-          Complete the form below to get started
+          {language === 'en' ? PROMPT_EN : PROMPT_HK}
         </h2>
         <h1>{APPLY_FORM_CONTENT.particulars}</h1>
         <Formik
@@ -297,13 +377,29 @@ export default function ApplyForm(): ReactElement {
                 {PARTICULARS.map((field: FieldType, index) =>
                   generateField(formik, field, language, 1 + index)
                 )}
-                <HasPets formik={formik} questionNumber={12} />
-                <IsMember formik={formik} questionNumber={13} />
+                <HasPets
+                  formik={formik}
+                  questionNumber={12}
+                  language={language}
+                />
+                <IsMember
+                  formik={formik}
+                  questionNumber={13}
+                  language={language}
+                />
                 {APPLY_INFO.map((field: FieldType, index) =>
                   generateField(formik, field, language, 14 + index)
                 )}
-                <ServiceTypes formik={formik} questionNumber={17} />
-                <HasIllness formik={formik} questionNumber={18} />
+                <ServiceTypes
+                  formik={formik}
+                  questionNumber={17}
+                  language={language}
+                />
+                <HasIllness
+                  formik={formik}
+                  questionNumber={18}
+                  language={language}
+                />
                 <h1>{APPLY_FORM_CONTENT.InfoCollectionTitle}</h1>
                 {INFO_COLLECTION.map((field: FieldType) =>
                   generateField(formik, field, language)
@@ -330,16 +426,30 @@ export default function ApplyForm(): ReactElement {
                 {DECLARATION.map((field: FieldType) =>
                   generateField(formik, field, language)
                 )}
-                <div className={styles.outro}>
-                  <h2>THANK YOU!</h2>
-                  <div>
-                    Your answers will help us find the best role for you.
-                  </div>{' '}
-                  <div>
-                    Please <strong>click the button below</strong> to submit
-                    your application.
+                {language === 'en' ? (
+                  <div className={styles.outro}>
+                    <h2>THANK YOU!</h2>
+                    <div>
+                      Your answers will help us find the best role for you, and
+                      we will notify you via email when we find suitable
+                      volunteering opportunities.
+                    </div>{' '}
+                    <div>
+                      Please <strong>click the button below</strong> to submit
+                      your application.
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className={styles.outro}>
+                    <h2 style={{ fontSize: 48 }}>再次感謝您的申請！</h2>
+                    <div>
+                      你所登記的資料，能讓我們替你找出最合適的義務工作。我們將會再以電郵通知大家有關各類義工需要及其工作安排。
+                    </div>{' '}
+                    <div>
+                      請按下方 <strong>「提交」</strong> 以完成登記你的申請。
+                    </div>
+                  </div>
+                )}
                 <button
                   className={styles.Button}
                   type="submit"

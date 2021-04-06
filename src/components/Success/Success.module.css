@@ -29,6 +29,10 @@
     line-height: 2;
 }
 
+.Success a:visited{
+    color: blue;
+}
+
 .flex{
     display: flex;
     justify-content: center;

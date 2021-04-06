@@ -6,9 +6,10 @@ import { ApplyFormData } from './ApplyForm';
 interface Props {
   formik: FormikProps<ApplyFormData>;
   questionNumber: number;
+  language: 'en' | 'hk';
 }
 
-const AR = {
+const AR_EN = {
   name: 'serviceTypesAR',
   type: 'checkbox',
   options: [
@@ -19,8 +20,19 @@ const AR = {
   ],
   required: false
 };
+const AR_HK = {
+  name: 'serviceTypesAR',
+  type: 'checkbox',
+  options: [
+    '動物管理員 (9am – 12nn 清潔狗房籠舍)',
+    '暫養家長 (為動物提供一個臨時的家，寵物將會暫住於閣下的家，由數星期到數月不等）'
+    // 'Cat Colony Care Programme (CCCP) Carer',
+    // 'Community Dog Programme (CDP) Carer'
+  ],
+  required: false
+};
 
-const NAR = {
+const NAR_EN = {
   name: 'serviceTypesNAR',
   type: 'checkbox',
   options: [
@@ -33,11 +45,27 @@ const NAR = {
   ],
   required: false
 };
+const NAR_HK = {
+  name: 'serviceTypesNAR',
+  type: 'checkbox',
+  options: [
+    '大型活動 / 慈善義賣 (室內)',
+    '大型活動 / 慈善義賣 (戶外)',
+    '文職工作',
+    '美術設計',
+    'IT技術支援',
+    '編輯/翻譯工作'
+  ],
+  required: false
+};
 
 export default function ServiceTypes({
   formik,
-  questionNumber
+  questionNumber,
+  language
 }: Props): ReactElement {
+  const AR = language === 'en' ? AR_EN : AR_HK;
+  const NAR = language === 'en' ? NAR_EN : NAR_HK;
   return (
     <div
       style={{
@@ -59,7 +87,9 @@ export default function ServiceTypes({
                 {questionNumber}.
               </span>
             ) : null}
-            What kind of volunteer activities are you interested in?{' '}
+            {language === 'en'
+              ? 'What kind of volunteer activities are you interested in? '
+              : '您對那些義務工作範疇感興趣?'}
           </label>
         </div>
       </div>
@@ -73,9 +103,9 @@ export default function ServiceTypes({
           color: '#777777'
         }}
       >
-        Animal Care Related Duties
+        {language === 'en' ? 'Animal Care Related Duties' : '與動物有關工作'}
       </h2>
-      {generateField(formik, AR, 'en', 0)}
+      {generateField(formik, AR, language, 0)}
       <h2
         style={{
           textAlign: 'left',
@@ -86,9 +116,9 @@ export default function ServiceTypes({
           color: '#777777'
         }}
       >
-        General Duties
+        {language === 'en' ? 'General Duties' : '一般工作'}
       </h2>
-      {generateField(formik, NAR, 'en', 0)}
+      {generateField(formik, NAR, language, 0)}
     </div>
   );
 }

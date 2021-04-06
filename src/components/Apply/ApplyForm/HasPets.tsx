@@ -1,4 +1,4 @@
-import { Field, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import React, { ReactElement } from 'react';
 import { ChooseFormTypes } from '../../formFields/formUtils';
 import { FieldType } from '../../formFields/Types';
@@ -8,9 +8,10 @@ import { ApplyFormData } from './ApplyForm';
 interface Props {
   formik: FormikProps<ApplyFormData>;
   questionNumber: number;
+  language: 'en' | 'hk';
 }
 
-const HAS_PETS = {
+const HAS_PETS_EN = {
   title: 'Do you have any pets?',
   name: 'hasPets',
   type: 'radio',
@@ -18,7 +19,15 @@ const HAS_PETS = {
   required: true
 };
 
-const PET_TYPES = {
+const HAS_PETS_HK = {
+  title: '您有飼養寵物嗎？',
+  name: 'hasPets',
+  type: 'radio',
+  options: ['有', '沒有'],
+  required: true
+};
+
+const PET_TYPES_EN = {
   title: 'Pet Types',
   name: 'petTypes',
   type: 'checkbox',
@@ -26,14 +35,23 @@ const PET_TYPES = {
   required: false,
   extendedInput: true
 };
+const PET_TYPES_HK = {
+  title: '寵物類別',
+  name: 'petTypes',
+  type: 'checkbox',
+  options: ['狗', '貓', '其他'],
+  required: false,
+  extendedInput: true
+};
 
 export default function HasPets({
   formik,
-  questionNumber
+  questionNumber,
+  language
 }: Props): ReactElement {
   const { errors, touched } = formik;
-  const field: FieldType = HAS_PETS;
-  const field2: FieldType = PET_TYPES;
+  const field: FieldType = language === 'en' ? HAS_PETS_EN : HAS_PETS_HK;
+  const field2: FieldType = language === 'en' ? PET_TYPES_EN : PET_TYPES_HK;
 
   return (
     <div className="field" key={field.name}>
@@ -54,16 +72,16 @@ export default function HasPets({
           <div> </div>
         )}
         <div className="form-field">
-          {ChooseFormTypes(field, 'en')}
+          {ChooseFormTypes(field, language)}
           {errors[field.name as keyof (UpdateFormData | ApplyFormData)] &&
           touched[field.name as keyof (UpdateFormData | ApplyFormData)] ? (
             <div className="form-error">
               {errors[field.name as keyof (UpdateFormData | ApplyFormData)]}
             </div>
           ) : null}
-          {formik.values.hasPets === 'Yes' ? (
+          {formik.values.hasPets === 'Yes' || formik.values.hasPets === '有' ? (
             <div className="form-field">
-              {ChooseFormTypes(field2, 'en')}
+              {ChooseFormTypes(field2, language)}
               {field2.note ? (
                 <div className="form-note">{field2.note}</div>
               ) : null}
@@ -76,13 +94,6 @@ export default function HasPets({
                     ]
                   }
                 </div>
-              ) : null}
-              {formik.values.petTypesOthers?.includes('Others') ? (
-                <Field
-                  type="text"
-                  name={field2.name + 'Others'}
-                  placeholder="Please specify"
-                />
               ) : null}
             </div>
           ) : null}
